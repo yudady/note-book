@@ -1,5 +1,5 @@
 let ooxx = "fk ";
-let blog =`花蓮縣政府  <br/>
+let blog = `花蓮縣政府  <br/>
 ${ooxx}  <br/>
 卻被爆挪用8億多元給當地業者紓困`;
 
@@ -16,5 +16,6 @@ console.clear();
 console.log(Number.isFinite('1'));
 console.log(Number.isFinite(1));
 console.log(Number.MAX_SAFE_INTEGER)
-console.log(['a','b'].toString())
-console.log(Array.of(['a','b'].toString()))
+console.log(['a', 'b'].toString())
+console.log(Array.of(['a', 'b'].toString()))
+
