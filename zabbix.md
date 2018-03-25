@@ -47,4 +47,5 @@ EXAMPLES
 zabbix_get -s 127.0.0.1 -p 10050 -k "vfs.fs.size[/,pfree]"
 
 
-
+### 
+/usr/lib/zabbix/alertscripts/line_notify.sh
