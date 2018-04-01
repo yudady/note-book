@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 100%;
+			height: 80px;
+			background-color: pink;
+			position: relative;
+			display: -webkit-box;
+		}
+		div p:nth-child(1){
+			width: 120px;  /*固定的宽度，所以不参与-webkit-box-flex分配*/
+			height: 80px;
+			background-color: red;
+		}
+		div p:nth-child(2){
+			/*只有这1份，所以我们任取*/
+			-webkit-box-flex:1;
+			height: 80px;
+			background-color: blue;
+			display: -webkit-box;
+		}
+		div p:nth-child(2) span{
+			display: block;
+			-webkit-box-flex:1;
+			height: 80px;
+			background-color: orange;
+		}
+		div p:nth-child(3){
+			width: 120px;  /*固定的宽度，所以不参与-webkit-box-flex分配*/
+			height: 80px;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p>1</p>
+		<p>
+			<span>a</span>
+			<span>b</span>
+			<span>c</span>
+		</p>
+		<p>3</p>
+	</div>
+</body>
+</html>

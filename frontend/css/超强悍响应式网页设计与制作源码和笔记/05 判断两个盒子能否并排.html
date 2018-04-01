@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 700px;
+			height: 100px;
+			margin: 100px auto;
+			background-color: orange;
+		}
+		/*第一个盒子，CSS3的选择器*/
+		div p:nth-child(1){
+			float: left;
+			width: 20%;
+			height: 80px;
+			background-color: pink;
+			padding: 10px 20px 30px 40px;
+			border: 1px solid red;
+			margin-right: 10%;
+			box-sizing:border-box;
+		}
+		div p:nth-child(2){
+			float: left;
+			width: 70%;
+			height: 80px;
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p>1</p>
+		<p>2</p>
+	</div>
+</body>
+</html>

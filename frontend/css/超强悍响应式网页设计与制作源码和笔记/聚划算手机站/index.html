@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!-- 视口标签，让手机以一定标准尺寸呈递页面 -->
+	<!-- 具体含义，6月公开课 -->
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		header{
+			width: 100%;
+			height: 45px;
+			background: rgba(242,24,97,.95);
+			display: -webkit-box;
+		}
+		header .logo{
+			width: 110px;
+			height: 45px;
+			position: relative;
+		}
+		header .logo h1{
+			width: 75px;
+			height: 23px;
+			position: absolute;
+			background: url(images/logo.png);
+			background-size: cover;
+			left: 50%;
+			top: 50%;
+			/*CSS3中的变形，可以自己查手册来理解*/
+			-webkit-transform:translate(-50%,-50%);
+			/*SEO的考量，6月小强老师绿色食品网公开课*/
+			text-indent: -9999px;
+		}
+		header nav{
+			-webkit-box-flex:1;
+
+		}
+		header nav ul{
+			list-style: none;
+			display: -webkit-box;
+		}
+		header nav ul li{
+			-webkit-box-flex:1;
+			line-height: 45px;
+			text-align: center;
+		}
+		header nav ul li.cur{
+			/*CSS3的渐变，下个月韩奇峰老师CSS3的公开课*/
+			background-image: -webkit-linear-gradient(#f11861,#d61556);
+		}
+		header nav ul li a{
+			text-decoration: none;
+			color:white;
+		}
+		header .but{
+			width: 45px;
+			height: 45px;
+			position: relative;
+		}
+		header .but s{
+			width: 13px;
+			height: 13px;
+			position: absolute;
+			background: url(images/but.png);
+			background-size: cover;
+			left: 50%;
+			top: 50%;
+			/*CSS3中的变形，可以自己查手册来理解*/
+			-webkit-transform:translate(-50%,-50%);
+			/*SEO的考量，6月小强老师绿色食品网公开课*/
+			text-indent: -9999px;
+		}
+		.banner img{
+			width: 100%;
+			/*可以不写auto*/
+			height: auto;
+		}
+		.content{
+			padding: 10px;
+		}
+		.content ul{
+			list-style: none;
+		}
+		.content ul li{
+			float: left;
+			width: 31%;
+			margin-right: 2%;
+			/*高度是0*/
+			height: 0;
+			/*竖直方向的padding,参考的也是父亲的width*/
+			/*这里的padding-bottom数值，是根据width值，按比例算来*/
+			/*依据广告图片的比例计算而来*/
+			/*图片，实际呈递在了盒子的padding里面*/
+			padding-bottom: 23.20%;
+			background:url(images/ad1.jpg) no-repeat;
+			background-size: cover;
+			border: 1px solid #000;
+			box-sizing:border-box;
+			border-radius: 20px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<h1>聚划算手机网</h1>
+		</div>
+		<nav>
+			<ul>
+				<li class="cur"><a href="#">今日</a></li>
+				<li><a href="#">品牌</a></li>
+				<li><a href="#">生活</a></li>
+			</ul>
+		</nav>
+		<div class="but">
+			<s></s>
+		</div>
+	</header>
+	<div class="banner">
+		<img src="images/banner.jpg" />
+	</div>
+	<div class="content">
+		<!-- 广告小图标 -->
+		<div class="ad">
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
