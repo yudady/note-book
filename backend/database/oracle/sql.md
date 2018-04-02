@@ -1,7 +1,7 @@
 # date
 
 
-## 日期
+## oracle日期
 ```
 TO_DATE('2012-07-18 13:27:18', 'YYYY-MM-DD HH24:MI:SS')
 ```
@@ -18,6 +18,12 @@ order by login_time desc;
 
 ```
 
+
+## oracle flashback
+```
+SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP 
+   TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH:MI:SS')
+```
 
 
 

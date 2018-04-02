@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<style type="text/css">
-		*{
+		* {
 			margin: 0;
 			padding: 0;
 		}
-		div{
+
+		div {
 			width: 800px;
 			height: 100px;
 			margin: 100px auto;
 			background-color: pink;
 			/*要把盒子变成弹性盒模型:*/
-			display: -webkit-box;  
+			display: flex;
 		}
 
 		/*所有的p，既没有宽度，也没有浮动*/
-		div p:nth-child(1){
+
+		div p:nth-child(1) {
 			background-color: red;
-			-webkit-box-flex:1;
+			flex: 1;
 		}
-		div p:nth-child(2){
+
+		div p:nth-child(2) {
 			background-color: blue;
-			-webkit-box-flex:2;
+			flex: 2;
 		}
-		div p:nth-child(3){
+
+		div p:nth-child(3) {
 			background-color: green;
-			-webkit-box-flex:3;
+			flex: 3;
 		}
 	</style>
 </head>
+
 <body>
 	<div>
 		<p>1</p>
@@ -39,4 +45,5 @@
 		<p>3</p>
 	</div>
 </body>
+
 </html>

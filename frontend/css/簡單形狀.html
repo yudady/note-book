@@ -8,6 +8,7 @@
     <title>Document</title>
     <style type="text/css">
         div {
+            /*正方形*/
             width: 100px;
             height: 100px;
             margin: 30px;
@@ -19,6 +20,14 @@
         .circle {
             border-radius: 50%;
         }
+
+        .elliptical {
+            /*长方形*/
+            width: 200px;
+            height: 100px;
+            border-radius: 100px / 50px;
+        }
+
 
         .semi-circle {
             border-radius: 100px 100px 0 0;
@@ -33,9 +42,11 @@
             line-height: 45px;
             margin-top: 50px;
         }
+
         .sector {
             border-radius: 100px 0 0 0;
         }
+
         .arc {
             border-radius: 100px 0 100px 0;
             transform: rotate(45deg)
@@ -46,6 +57,7 @@
 <body>
     <div>div</div>
     <div class="circle">圓型</div>
+    <div class="elliptical">椭圆型</div>
     <div class="semi-circle">半圓型</div>
     <div class="semi-circle2">半圓型2</div>
     <div class="sector">扇形</div>
