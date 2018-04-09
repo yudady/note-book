@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>transistion-hover</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .picMove {
+            margin: 50px;
+            width: 13px;
+            height: 22px;
+            display: block;
+            background: url(./image/pic.png) no-repeat -128px -360px;
+            transition: all 0.1s;
+        }
+
+        .picMove:hover {
+            background-position: -128px -400px;
+        }
+
+
+
+        .box {
+            margin: 30px;
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            transition: all 1s ease-in-out 0.1s;
+        }
+
+        .box:hover {
+            margin: 300px;
+            background: #000;
+            color: #fff;
+            width: 300px;
+            height: 300px;
+            transform: rotate(45deg)
+        }
+
+        .box1 {
+            background-color: purple;
+        }
+
+        .box2 {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <hr>
+    <i class="picMove"></i>
+    <hr>
+    <div class="box box1">tran</div>
+    <div class="box box2">tran2</div>
+</body>
+
+</html>
