@@ -28,3 +28,4 @@ curl -XDELETE "localhost:9200/zonpay-`date -d '-30 days' '+%Y%m%d'`*" >> /var/lo
 curl -XGET 'http://localhost:9200/_nodes/stats?pretty'  
 ```
 
+bin/logstash -f json.conf

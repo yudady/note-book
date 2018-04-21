@@ -1,4 +1,4 @@
-# server需要傳送訊息給client
+# server 需要傳送訊息給 client
 
 ## ajax andn setInterval，輪詢資料
 ```
@@ -11,7 +11,7 @@ setInterval(function(){
 ```
 
 
-## ajax readyStatus=3 ， 連接上server後，保持不斷線
+## ajax readyStatus=3 ， 連接上server後，保持不斷線 ， 長連接
 
 ```
 xhr.onreadystatechange = function(){ 
@@ -26,14 +26,14 @@ xhr.onreadystatechange = function(){
 
 ## html5後，Server-Sent Events 與 WebSocket？
 
-WebSocket 提供了雙向（bi-directional）且全雙工（full-duplex）的優異傳輸能力，這樣的架構非常適合用於線上遊戲、聊天程式或是各種需要即時雙向傳輸的應用，乍看之下 SSE 可以做到的事情，WebSocket 可以做得更好。
-
-不過在某些應用上，瀏覽器不太需要傳送資料給伺服器，瀏覽器只是負責接收資料而已，例如股市行情、即時新聞等，這個時候就可以使用 SSE 這種單向的傳輸方式，如果偶爾需要傳送少量的資訊給伺服器時，也可以使用傳統的 XMLHttpRequest 來處理。
-
-由於 WebSocket 所使用的是雙向全雙工的連線，所以需要特別支援 WebSocket 協定的網頁伺服器軟體才能讓它正常運作，而 SSE 則是一種架構在傳統的 HTTP 協定之上的傳輸方式，也就是說你可以在不需要加裝任何特別的通訊協定或伺服器軟體即可直接使用 SSE，另外 SSE 也有一些 WebSocket 所沒有的特性，例如自動重新連線、事件 ID 與傳送任意的事件等，這些都是 SSE 才有的優點。
-
 1. Server-Sent Events（安全第一）
+> Server-Sent Events 瀏覽器不太需要傳送資料給伺服器，瀏覽器只是負責接收資料而已，例如股市行情、即時新聞等，這個時候就可以使用 SSE 這種單向的傳輸方式，如果偶爾需要傳送少量的資訊給伺服器時，也可以使用傳統的 XMLHttpRequest 來處理。SSE 則是一種架構在傳統的 HTTP 協定之上的傳輸方式，也就是說你可以在不需要加裝任何特別的通訊協定或伺服器軟體即可直接使用 SSE，另外 SSE 也有一些 WebSocket 所沒有的特性，例如自動重新連線、事件 ID 與傳送任意的事件等，這些都是 SSE 才有的優點。
+
+
 2. WebSocket （W3C標準）
+> WebSocket 提供了雙向（bi-directional）且全雙工（full-duplex）的優異傳輸能力，這樣的架構非常適合用於線上遊戲、聊天程式或是各種需要即時雙向傳輸的應用
+
+
 
 
 ## SSE 瀏覽器端實作
@@ -103,7 +103,6 @@ public class EventSourceServlet extends HttpServlet {
 ![Server-sent events](images/Server-sent events.png)
 
 
-![Web Sockets](images/Web Sockets.png)
 
 ## WebSocket 瀏覽器端實作
 
@@ -167,3 +166,6 @@ public class WsServer {
 
 }
 ```
+
+
+![Web Sockets](images/Web Sockets.png)

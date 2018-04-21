@@ -46,3 +46,17 @@ USING
 
 --DROP DATABASE LINK mypay009;
 
+## oracle length
+
+```
+SELECT ORDER_NO,CLIENT_IP FROM PY_ORDER WHERE lengthb(CLIENT_IP) > 40;
+
+```
+
+
+
+
+cat /mnt/nfs/var/rd2/callback.log | grep 201804110090005041
+cat /mnt/nfs/var/rd3/callback.log | grep 201804110090005041
+cat /mnt/nfs/var/rd3-1/callback.log | grep 201804110090005041
+cat /mnt/nfs/var/rd3-2/callback.log | grep 201804110090005041
