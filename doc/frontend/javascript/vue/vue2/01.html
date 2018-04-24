@@ -28,16 +28,18 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         let todos = [];
-        todos.push({text: '学习 JavaScript'});
-        todos.push({text: '学习 Vue'});
-        todos.push({ text: '创建激动人心的代码'});
+        todos.push({ text: '学习 JavaScript' });
+        todos.push({ text: '学习 Vue' });
+        todos.push({ text: '创建激动人心的代码' });
 
         new Vue({
             el: '#app',
-            data: {
-                message: 'Hello Vue!',
-                message2: '页面加载于 ' + new Date().toLocaleString(),
-                todos: todos
+            data: function () {
+                return {
+                    message: 'Hello Vue!',
+                    message2: '页面加载于 ' + new Date().toLocaleString(),
+                    todos: todos
+                }
             }
         })
     </script>

@@ -1,0 +1,68 @@
+Adobe Photoshop
+
+
+
+PS   P一下
+
+
+图像处理
+
+
+一、区域划分：菜单栏、属性栏、工具箱、控制面板（窗口菜单里找）、工作区
+
+
+二、工作：
+	
+	新建画布  Ctrl+N       
+	填充前景色  Alt+Delete
+	填充背景色  Ctrl+Delete
+
+
+三、功能键：  Ctrl   Alt    Shift
+	Shift-約束
+
+四、常用键：
+	撤销——ESC
+
+	返回——Ctrl+Z
+
+	连续返回——Ctrl+Alt+Z
+
+
+五、新建图层  Ctrl+Alt+Shift+N
+
+
+六、剪切并原位粘贴  Ctrl+Shift+J
+	複製 Ctrl+J
+
+
+七、建立图层组  Ctrl+G
+
+
+八、合并图层  Ctrl+E
+
+
+九、图层排列：
+
+	将当前对象向上（向前）移动  Ctrl+]
+	将当前对象至于顶层（最前）移动  Ctrl+Shift+]
+	
+	将当前对象向下（向后）移动  Ctrl+[
+	将当前对象至于底层（最后）移动  Ctrl+Shift+[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
