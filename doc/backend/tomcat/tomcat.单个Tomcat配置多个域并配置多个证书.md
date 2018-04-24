@@ -1,4 +1,4 @@
- 单个Tomcat配置多个域并配置多个证书
+ # 单个Tomcat配置多个域并配置多个证书
  
 一个Tomcat运行两个应用，分别对应两个域名： www.domain1.com 和 www.domain2.cn ，对于http协议（80端口），只要配置Tomcat的虚拟主机就可以了。
 
