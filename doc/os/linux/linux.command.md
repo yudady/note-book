@@ -5,7 +5,8 @@
 date -d '-14 days' '+%Y%m%d'
 ```
 
-
+## find
+find / -type f -name "*logstash*"
 
 
 ## 手动和时间服务器校准时间：
