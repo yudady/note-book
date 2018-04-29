@@ -24,10 +24,13 @@ A license server for Jrebel & JetBrains products, it also support JRebel for And
 使用 http://xxx.com:8888/jrebelusername 这样的地址无法激活了
 需要修改为 http://xxx.com:8888/88414687-3b91-4286-89ba-2dc813b107ce 这样的地址
 
-如：http://192.168.123.12:8888/88414687-3b91-4286-89ba-2dc813b107ce
+如：http://yudady.tplinkdns.com:8081/88414687-3b91-4286-89ba-2dc813b107ce
 
 如：
-http://localhost:8081/88414687-3b91-4286-89ba-2dc813b107ce
+
+
+http://yudady.tplinkdns.com:8081/88414687-3b91-4286-89ba-2dc813b107ce
+
 
 后面的那串为GUID，随便找个GUID在线生成器生成个就行了
 
