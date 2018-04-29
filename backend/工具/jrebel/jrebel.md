@@ -1,5 +1,14 @@
 # Jrebel & Jet Brains License Server for Java
 
+```
+intellij licence server => http://localhost:8081
+jrebel licence server => http://localhost:8081/88414687-3b91-4286-89ba-2dc813b107ce
+
+intellij jrebel plugin => jr-ide-intellij-2018.1.0_13-17.zip
+```
+
+
+
 A license server for Jrebel & JetBrains products, it also support JRebel for Android and XRebel.
 
 ## JREBEL 2018.1 激活教程 
