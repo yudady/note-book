@@ -1,0 +1,172 @@
+http://ks1.kaisared.com/gtgamestree/zh-cn/index.html#                                                                          
+账号 pay444     
+密码 123qwe
+
+测试会员账号        cs9911         密码  cs9911                     
+账号               cs9922          密码   cs9922
+------------------------------------------------------
+获取额度
+http://ks1.kaisared.com/gtgamestree/zh-cn/request.do
+typecode=1&portcode=-1&actiontype=38&pagecode=transactionmgr_add.html&parascount=1&para0=KS%26cs9911
+typecode=1&portcode=-1&actiontype=38&pagecode=transactionmgr_add.html&parascount=1&para0=KS&cs9911
+返回
+["1.1", {"rows":[{"u_siteid":"KS","u_uid":"CS9911","u_pwd":"7F0B70D30A9818924534239B745C63F5","u_puid":"K1Z61","ud_realname":"","u_credit":"1.00","ud_sex":"1","ud_birthday":"1900/1/1 0:00:00","ud_phone":"","ud_email":"","u_state":"2","u_agent":"K1Z61","u_totalcredit":"1.00"}]}]
+
+
+
+
+
+
+
+
+------------------------------------------------------
+储存
+http://ks1.kaisared.com/gtgamestree/zh-cn/request.do
+typecode=7&portcode=-1&actiontype=13&pagecode=transactionmgr_add.html&parascount=20&para0=KS&para1=cs9911&para2=1&para3=1&para4=0&para5=0&para6=4&para7=mypaytest&para8=false&para9=0&para10=0&para11=0&para12=0&para13=0&para14=0&para15=2&para16=1&para17=0&para18=0&para19=0
+返回
+["1.1", 0]
+
+------------------------------------------------------
+http://ks1.kaisared.com/gtgamestree/zh-cn/request.do
+typecode=7&portcode=-1&actiontype=1&pagecode=transactionmgr_list.html&parascount=20&para0=KS&para1=2018-04-27+00%3A00%3A00&para2=2018-04-27+00%3A00%3A00&para3=&para4=&para5=&para6=&para7=&para8=0&para9=0&para10=1&para11=1&para12=10&para13=2&para14=4&para15=0&para16=0&para17=0&para18=&para19=0
+typecode=7&portcode=-1&actiontype=1&pagecode=transactionmgr_list.html&parascount=20&para0=KS&para1=2018-04-27 00:00:00&para2=2018-04-27 00:00:00&para3=&para4=&para5=&para6=&para7=&para8=0&para9=0&para10=1&para11=1&para12=10&para13=2&para14=4&para15=0&para16=0&para17=0&para18=&para19=0
+
+
+
+返回
+["1.1",
+[{
+	"total": 2,
+	"rows": [{
+		"row": "1",
+		"TransCode": "201804270106507482",
+		"Date": "20180427",
+		"SiteID": "KS",
+		"User": "CS9911",
+		"Puser": "K1Z61",
+		"Transtype": "1",
+		"State": "1",
+		"Lock": "2",
+		"LockUser": "",
+		"PayID": "0",
+		"RealName": "",
+		"Memo": "mypaytest#",
+		"PayName": "",
+		"PayMemo": "",
+		"PayTypeID": "",
+		"Credit": "1.00",
+		"CR_Amount": "1.00",
+		"ZC_Amount": "0.00",
+		"CK_Activieamount": "0.000",
+		"KC_Activieamount": "0.00",
+		"Extras": "0.00",
+		"Wdfee": "0.00",
+		"Phone": "",
+		"Deposittype": "4",
+		"IP": "211.75.237.90",
+		"Createuser": "PAY444",
+		"Fdt": "2018/4/27 17:35:29",
+		"Ldt": "2018/4/27 17:35:29",
+		"onlinepaytypeid": "0",
+		"Edituser": "PAY444",
+		"RepeatType": "0",
+		"Bankname": "",
+		"Bankaccname": "",
+		"Bankcardno": "",
+		"Bankprovice": "",
+		"Subbank": "",
+		"Bankarea": "",
+		"memocontent": "mypaytest",
+		"Actmult": "0",
+		"CashLevelName": "0",
+		"IncomeAmount": "1.000",
+		"CurrentAmount": "2.000"
+	},
+	{
+		"row": "2",
+		"TransCode": "201804270106506737",
+		"Date": "20180427",
+		"SiteID": "KS",
+		"User": "CS9911",
+		"Puser": "K1Z61",
+		"Transtype": "1",
+		"State": "1",
+		"Lock": "2",
+		"LockUser": "",
+		"PayID": "0",
+		"RealName": "",
+		"Memo": "mypaytest#",
+		"PayName": "",
+		"PayMemo": "",
+		"PayTypeID": "",
+		"Credit": "1.00",
+		"CR_Amount": "1.00",
+		"ZC_Amount": "0.00",
+		"CK_Activieamount": "0.000",
+		"KC_Activieamount": "0.00",
+		"Extras": "0.00",
+		"Wdfee": "0.00",
+		"Phone": "",
+		"Deposittype": "4",
+		"IP": "211.75.237.90",
+		"Createuser": "PAY444",
+		"Fdt": "2018/4/27 17:28:11",
+		"Ldt": "2018/4/27 17:28:11",
+		"onlinepaytypeid": "0",
+		"Edituser": "PAY444",
+		"RepeatType": "0",
+		"Bankname": "",
+		"Bankaccname": "",
+		"Bankcardno": "",
+		"Bankprovice": "",
+		"Subbank": "",
+		"Bankarea": "",
+		"memocontent": "mypaytest",
+		"Actmult": "0",
+		"CashLevelName": "0",
+		"IncomeAmount": "1.000",
+		"CurrentAmount": "2.000"
+	}]
+},
+{
+	"rows": [{
+		"TotalCredit": "0",
+		"TotalCR_Amount": "2.00",
+		"TotalCR_Amount_Special": "2.00",
+		"TotalZC_Amount": "0.00",
+		"TotalZC_Amount_Special": "0.00",
+		"TotalCK_Activieamount": "0.000",
+		"TotalKC_Activieamount": "0.00",
+		"Extras": "0.00",
+		"Wdfee": "0.00",
+		"TotalIncomeAmount": "2.000"
+	}]
+}]]
+
+------------------------------------------------------
+交易成功
+http://ks1.kaisared.com/gtgamestree/zh-cn/request.do
+typecode=7&portcode=-1&actiontype=3&pagecode=transactionmgr_list.html&parascount=3&para0=201804270106507482&para1=2&para2=1%7CKS%7CCS9911
+typecode=7&portcode=-1&actiontype=3&pagecode=transactionmgr_list.html&parascount=3&para0=201804270106507482&para1=2&para2=1|KS|CS9911
+
+返回
+["1.1", 0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
