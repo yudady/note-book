@@ -1,0 +1,41 @@
+<html>
+
+<head>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.get("https://raw.githubusercontent.com/card-game-app/BytesJack/master/README.md", function (result) {
+        //$("#app").text(result);
+        console.log("==================================");
+        console.log("==================================");
+        console.log("==================================");
+        console.log("==================================");
+        console.log("==================================");
+
+        let html = "";
+        var splitted = result.split("\n"); 
+
+        console.log(splitted.length) ; 
+
+        splitted.forEach(function (value) {
+          html += "<div>"+value+"</div><br>"
+          console.log(value);
+        });
+        $("#app").html(html);
+
+        // console.log(result);
+      });
+    });
+
+
+
+
+  </script>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+
+</html>

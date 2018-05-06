@@ -1,0 +1,64 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+
+function foo(response) {
+  var meta = response.meta;
+  var data = response.data;
+  console.log(meta);
+  console.log(data);
+  
+  console.log("-------------");
+  console.log(data.content);
+  
+
+  // document.getElementById("app").innerHTML = data.content ;
+  
+  // window.open(data.download_url);
+  
+
+  
+}
+
+var script = document.createElement('script');
+script.src = 'https://api.github.com/repos/card-game-app/BytesJack/readme?callback=foo';
+
+document.getElementsByTagName('head')[0].appendChild(script);
+
+/*
+$.ajax({
+    headers: {
+        "Accept":"application/vnd.github.VERSION.raw"
+    },
+    url: 'https://raw.githubusercontent.com/card-game-app/BytesJack/master/README.md',
+    dataType: 'text/plain',
+    success: function(results){
+      console.log(results);
+        //var content = results.data.content;
+        //alert(results);
+    }
+});
+*/
+
+$.get("https://raw.githubusercontent.com/card-game-app/BytesJack/master/README.md", function(result){
+  $("#app").text(result);
+  console.log("==================================");
+  console.log("==================================");
+  console.log("==================================");
+  console.log("==================================");
+  console.log("==================================");
+  console.log(result);
+});
+
+
+</script>
+</head>
+
+<body>
+	<div id="app"></div>
+</body>
+</html>

@@ -30,8 +30,8 @@ A license server for Jrebel & JetBrains products, it also support JRebel for And
 
 
 http://yudady.tplinkdns.com:8081/88414687-3b91-4286-89ba-2dc813b107ce
-
-
+http://yudady.tplinkdns.com:8081/da03b038-8c9c-44f5-926f-8bda0296712f
+http://192.168.168.150:8081/da03b038-8c9c-44f5-926f-8bda0296712f
 后面的那串为GUID，随便找个GUID在线生成器生成个就行了
 
 从老版本升级到该版本的不受影响，激活后一定手动要切换到离线模式，可离线180天，可随时重点下，180天周期会重新刷新
