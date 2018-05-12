@@ -109,7 +109,7 @@ http://testapi.mypay2.com/myPay/admin/login.jsp
     zonpay	/   mypay@zonvan
 
 
-
+http://testapi.mypay2.com/myPayNotifyCenter/monitor.jsp
 
 
 
