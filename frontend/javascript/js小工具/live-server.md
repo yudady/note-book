@@ -18,6 +18,10 @@
 
 ![auto-reload](live-server-images/2018-03-21_002704.png) 
 
+
+
+![Open a HTML file and Right click on the editor and choose the options.](live-server-images/vscode-live-server-explorer-menu-demo-1.gif) 
+
 ----
 
 
