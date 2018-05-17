@@ -17,6 +17,15 @@ Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/pr
 
 [Google OAuth2 Sign-In - Spring Boot Security in Google Cloud Platform](https://www.youtube.com/watch?v=00-hMP2KKSs)
 
+
+[使用Google OAuth 2.0 存取Google API](http://blog.kenyang.net/2012/09/15/google-oauth-20-google-api)
+
+
+
+
+
+
+
 ---
 
 {
