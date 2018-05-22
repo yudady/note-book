@@ -12,15 +12,26 @@ cmd 输入 “ jupyter notebook ”
 
 
 ```
+检查 python version
+pip -V
+
+
+更新
 conda update -n base conda
-conda search opencv --channel conda-forge
+
 
 
 
 conda config --add channels conda-forge
 conda install opencv
-conda install -c anaconda numpy 
+conda install numpy 
 conda install matplotlib   // Matplotlib是Python主要的绘图库
+conda install pillow
+
+
+
+
+
 
 
 
@@ -33,8 +44,16 @@ conda install matplotlib   // Matplotlib是Python主要的绘图库
 
 ```
 
+## 资料
 
-## 安装其他套件(pip vs. conda)
+[OpenCV-Python中文教程
+](https://www.kancloud.cn/aollo/aolloopencv/259610)
 
-1. pip installs python packages in any environment.
-2. conda installs any package in conda environments.
+[ Python 與 OpenCV 讀取影像圖檔](https://blog.gtwang.org/programming/opencv-basic-image-read-and-write-tutorial/)
+
+[pycv](https://github.com/techfort/pycv)
+
+
+
+
+

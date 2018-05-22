@@ -60,3 +60,8 @@ cat /mnt/nfs/var/rd2/callback.log | grep 201804110090005041
 cat /mnt/nfs/var/rd3/callback.log | grep 201804110090005041
 cat /mnt/nfs/var/rd3-1/callback.log | grep 201804110090005041
 cat /mnt/nfs/var/rd3-2/callback.log | grep 201804110090005041
+
+---
+
+## 书签
+[oracle提高查询效率的34条方法](https://www.2cto.com/database/201301/181269.html)
