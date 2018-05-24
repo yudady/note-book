@@ -4,10 +4,15 @@
 **/dist
 
 **/.idea
-**/out
-**/bin
 **/.classpath
 **/.project
 **/.settings
-
 **/.gradle
+
+**/out
+**/bin
+**/build
+**/target
+
+
+
