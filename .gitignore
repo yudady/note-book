@@ -5,3 +5,9 @@
 
 **/.idea
 **/out
+**/bin
+**/.classpath
+**/.project
+**/.settings
+
+**/.gradle
