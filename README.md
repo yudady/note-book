@@ -1,5 +1,9 @@
 # 我的笔记本 （紙上得來終覺淺，絕知此事要躬行。）
 
+> 真正的科學家，所有的基礎學科是全部掌握的，然後才會用這些基礎學科的知識服務于自己鑽研的方面。
+
+
+
 ## chrome 直接显示 Markdown 文档
 [Markdown Preview Plus => chrome plugin](https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl)
 
