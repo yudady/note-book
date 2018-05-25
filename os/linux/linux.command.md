@@ -19,3 +19,8 @@ yum -y install ntpdate
 校准后然后开启ntpd服务：service ntpd start
 
 ```
+
+## 找出最后一千行的 关键字(locks)
+```
+tail -n 1000 ./orabbix.log | grep locks
+```
