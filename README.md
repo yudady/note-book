@@ -2,7 +2,23 @@
 
 > 真正的科學家，所有的基礎學科是全部掌握的，然後才會用這些基礎學科的知識服務于自己鑽研的方面。
 
+---
 
+# TODO
+
+找时间整理 oracle Scripts
+https://github.com/search?q=Oracle-DBA-Scripts
+
+
+
+
+
+
+
+
+
+
+---
 
 ## chrome 直接显示 Markdown 文档
 [Markdown Preview Plus => chrome plugin](https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl)
@@ -45,5 +61,8 @@
 ELK API
 GOOGLE DRIVE API
 https://developers.google.com/drive/v3/web/downloads
+
+
+
 
 

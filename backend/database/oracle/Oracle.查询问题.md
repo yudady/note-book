@@ -12,22 +12,13 @@
 9.返回了不必要的行和列
 10.查询语句不好，没有优化
 
-### 可以通过如下方法来优化查询 ：
-
-
-
-## oracle alert log location
-
-```
-select value from v$diag_info where name ='Diag Alert'; 
-```
-
 
 
 
 ## Oracle 查询耗时 SQL
 
-当你的系统变慢时，如何查询系统中最耗时的 SQL 呢？试一试下面的 SQL 吧。
+> 当你的系统变慢时，如何查询系统中最耗时的 SQL 呢？试一试下面的 SQL 吧。
+
 ```
 select * from (
 	select * from V$SQLSTATS
@@ -48,20 +39,22 @@ select * from (
 ```
 
 
-## Identify the blocking session
-```
-select * from v$lock ;
-```
-
-
-
-----
-
-### 查詢Oracle誰Locks住Table: 列出当前locks资料（list current locks）
-
+## oracle alert log location（找出oracle alert log 位置）
 
 ```
+select value from v$diag_info where name ='Diag Alert'; 
+```
 
+
+
+
+
+## 查詢Oracle誰Locks住Table: 列出当前locks资料（list current locks）
+
+
+```
+
+-- 找出被lock资讯
 SELECT SN.USERNAME || '@' || SN.MACHINE,
        '|SID->' || M.SID,
        '|Serial->' || SN.SERIAL#,
@@ -111,16 +104,9 @@ SELECT SN.USERNAME || '@' || SN.MACHINE,
                            AND S.ID2 = M.ID2)))
  ORDER BY SN.USERNAME, SN.SID, T.PIECE ;
 
+---
 
-
-
-
-
-
-
------------------------------------------
-
-
+-- 找出被lock资讯
 SELECT B.OBJECT_NAME OBJ_NAME,
        A.ORACLE_USERNAME ORA_USER,
        A.OS_USER_NAME OS_USER,
@@ -145,8 +131,9 @@ SELECT B.OBJECT_NAME OBJ_NAME,
 
 
 
-
+--- 把被lock的session杀掉
 ALTER SYSTEM KILL SESSION 'sid,serial#';
+
 ```
 
 
