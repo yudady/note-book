@@ -96,7 +96,13 @@ USING
 
 
 -- 把 py_order -> from mypaycenter to cust DB
-SELECT * FROM py_order@mypaycenter where CUST_ID = '090'
+
+SELECT * FROM py_order@mypaycenter where CUST_ID = '090';
+
+
+
+
+
 INSERT INTO PY_ORDER 
 SELECT 
 ORDER_NO
@@ -108,7 +114,7 @@ ORDER_NO
 ,RECHARGE_AMOUNT
 ,PAYMENT_DATE
 ,PAYMENT_NOTIFY_DATE
-,STATUS
+,'3'   // STATUS(已支付-已添加)
 ,LOCK_USER_ID
 ,LOCK_USER_NAME
 ,LOCK_TIME
