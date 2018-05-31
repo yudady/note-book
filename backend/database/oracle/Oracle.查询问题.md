@@ -1,5 +1,37 @@
 # Oracle查询慢的原因
 
+
+## oracle 建议
+
+```
+-- -- 檢索SQL調優顧問結果。 如果你喜歡，你只能運行最近的運行，但它只會包含新的建議。 該語法將檢索所有建議，包括那些自此之後被修改的建議
+-- 警告：它會產生相當多的輸出，因為它有每個調整建議。
+
+SELECT DBMS_SQLTUNE.REPORT_AUTO_TUNING_TASK((SELECT MIN(EXECUTION_NAME)
+                                              FROM DBA_ADVISOR_FINDINGS
+                                             WHERE TASK_NAME LIKE
+                                                   'SYS_AUTO_SQL%'),
+                                            (SELECT MAX(EXECUTION_NAME)
+                                               FROM DBA_ADVISOR_FINDINGS
+                                              WHERE TASK_NAME LIKE
+                                                    'SYS_AUTO_SQL%'))
+  FROM DUAL;
+
+
+-- 記下建議的執行名稱和對象ID
+-- 使用此信息查詢dba_advisor_rationale中的提示：
+
+SELECT REC_ID, TO_CHAR(ATTR5)
+  FROM DBA_ADVISOR_RATIONALE
+ WHERE EXECUTION_NAME = 'EXEC_24365'
+   AND OBJECT_ID = 19930
+   AND REC_ID > 0
+ ORDER BY REC_ID
+```
+
+
+
+
 ## 查询速度慢的原因很多，常见如下几种：
 1.没有索引或者没有用到索引（这是查询慢最常见的问题，是程序设计的缺陷）
 2.I/O吞吐量小，形成了瓶颈效应。
@@ -138,12 +170,46 @@ ALTER SYSTEM KILL SESSION 'sid,serial#';
 
 
 
+## ORACLE查看SQL的执行次数/频率
+
+### SQL语句执行了多少次
+```
+SELECT PARSING_SCHEMA_NAME, SQL_ID, SQL_TEXT, FIRST_LOAD_TIME, EXECUTIONS
+  FROM V$SQLAREA
+ WHERE 1 = 1
+   AND PARSING_SCHEMA_NAME IN ('MYPAY', 'MYPAYCENTER')
+ ORDER BY EXECUTIONS DESC;
+
+SELECT SQL_TEXT, EXECUTIONS
+  FROM (SELECT SQL_TEXT,
+               EXECUTIONS,
+               RANK() OVER(ORDER BY EXECUTIONS DESC) EXEC_RANK
+          FROM V$SQLAREA)
+ WHERE EXEC_RANK <= 15;
+
+
+
+-- EXECUTIONS表示同一条SQL语句一共执行了多少次，SORTS表示排序的次数，DISK_READS表示物理读的数量。
+SELECT *
+  FROM (SELECT PARSING_USER_ID,
+               EXECUTIONS,
+               SORTS,
+               COMMAND_TYPE,
+               DISK_READS,
+               SQL_TEXT
+          FROM V$SQLAREA
+         ORDER BY DISK_READS DESC)
+ WHERE ROWNUM < 10;
 
 
 
 
+```
 
 
+
+## Oracle 控制文件和日志文件
+[Oracle 控制文件和日志文件](https://blog.csdn.net/deram_boy/article/details/51248456)
 
 
 

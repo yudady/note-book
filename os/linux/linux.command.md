@@ -24,3 +24,10 @@ yum -y install ntpdate
 ```
 tail -n 1000 ./orabbix.log | grep locks
 ```
+
+
+
+
+
+
+free -m

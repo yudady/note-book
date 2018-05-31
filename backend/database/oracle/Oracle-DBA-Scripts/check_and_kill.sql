@@ -1,4 +1,4 @@
--- Check what the sessions in our instance are waiting for
+﻿-- Check what the sessions in our instance are waiting for
 select event,count(*) from v$session group by event order by count(*);
 
 -- Flexible query to check what's currently running in the system
@@ -18,13 +18,24 @@ left outer join gv$sqlarea sa on sa.ADDRESS = s.SQL_ADDRESS and s.inst_id=sa.ins
 where 1=1 and sql_text like '...'
 
 -- Check what a specific session is doing:
-select 
-      p.SPID UnixProcess ,s.SID,s.serial#,s.USERNAME,s.COMMAND,s.MACHINE,s.SQL_ADDRESS,s.SQL_HASH_VALUE
-      ,s.program, status,sql_text,COMMAND_TYPE
-    from gv$session s,gv$process p, gv$sqlarea sa
-	where p.ADDR = s.PADDR and s.inst_id=p.inst_id 
-	and sa.ADDRESS = s.SQL_ADDRESS and s.inst_id=sa.inst_id
-	and s.sid=1722;
+SELECT P.SPID UNIXPROCESS,
+       S.SID,
+       S.SERIAL#,
+       S.USERNAME,
+       S.COMMAND,
+       S.MACHINE,
+       S.SQL_ADDRESS,
+       S.SQL_HASH_VALUE,
+       S.PROGRAM,
+       STATUS,
+       SQL_TEXT,
+       COMMAND_TYPE
+  FROM GV$SESSION S, GV$PROCESS P, GV$SQLAREA SA
+ WHERE P.ADDR = S.PADDR
+   AND S.INST_ID = P.INST_ID
+   AND SA.ADDRESS = S.SQL_ADDRESS
+   AND S.INST_ID = SA.INST_ID
+   AND S.SID = 1722;
 
 -- Find all sessions that are blocked and which session is blocking them
 -- Then find what the blocking session is doing
@@ -33,14 +44,19 @@ select sid,blocking_session,username,sql_id,event,machine,osuser,program from v$
 
 
 -- generate commands to kill all sessions from a specific user on specific instance
-select 'alter system kill session '''|| SID||',' || serial# ||''' immediate;' from gv$session where username='BAD_USER' and inst_id=1;
+SELECT 'alter system kill session ''' || SID || ',' || SERIAL# ||
+       ''' immediate;'
+  FROM GV$SESSION
+ WHERE USERNAME = 'BAD_USER'
+   AND INST_ID = 1;
 
 
 -- Kill all sessions waiting for specific events by a specific user
-select       'alter system kill session '''|| s.SID||',' || s.serial# ||''';' 
-from gv$session s
-where 1=1 
-and (event='latch: shared pool' or event='library cache lock') and s.USERNAME='DBSNMP';
+SELECT 'alter system kill session ''' || S.SID || ',' || S.SERIAL# || ''';'
+  FROM GV$SESSION S
+ WHERE 1 = 1
+   AND (EVENT = 'latch: shared pool' OR EVENT = 'library cache lock')
+   AND S.USERNAME = 'DBSNMP';
 
 -- kill all sessions executing a bad SQL
 select 
@@ -60,11 +76,23 @@ select sql_id,count(*) from v$session where program like '%P0%' group by sql_id;
 
 -- Find inactive sessions
 -- This can be used to decide which sessions to kill if the DB is running out of processes
-select sid, blocking_session,username,program,machine,osuser,  sql_id, prev_sql_id, event,LAST_CALL_ET from v$session where status != 'ACTIVE' and last_call_et>3600;
+SELECT SID,
+       BLOCKING_SESSION,
+       USERNAME,
+       PROGRAM,
+       MACHINE,
+       OSUSER,
+       SQL_ID,
+       PREV_SQL_ID,
+       EVENT,
+       LAST_CALL_ET
+  FROM V$SESSION
+ WHERE STATUS != 'ACTIVE'
+   AND LAST_CALL_ET > 3600;
 
 
 -- How many sessions openned by each app server
-select machine,count(*) from gv$session s group by machine;
+SELECT MACHINE, COUNT(*) FROM GV$SESSION S GROUP BY MACHINE;
 
 -- Find sql_id for a specific sql snippet
 select sql_id,sql_text from v$sql where dbms_lob.instr(sql_text, 'create INDEX',1,1) > 0

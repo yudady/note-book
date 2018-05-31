@@ -9,6 +9,8 @@
 **/.settings
 **/.gradle
 **/.ipynb_checkpoints
+**/*.~sql
+
 
 **/out
 **/bin
