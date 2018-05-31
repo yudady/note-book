@@ -1,4 +1,4 @@
-# 优化资讯
+# oracle自动内存
 
 
 
@@ -109,11 +109,16 @@ select * from dba_autotask_job_history order by JOB_START_TIME desc;
 
 ```
 -- 检查db blocks
-SELECT OWNER, SEGMENT_NAME, SEGMENT_TYPE, BLOCKS, BYTES / 1024 / 1024 "MB"
+SELECT OWNER,
+       SEGMENT_NAME,
+       SEGMENT_TYPE,
+       BLOCKS,
+       TO_CHAR(BYTES / 1024 / 1024) "MB"
   FROM DBA_SEGMENTS
  WHERE 1 = 1
    AND SEGMENT_NAME LIKE '%PY_%'
    AND BLOCKS > 1024;
+
 
 
 -- 收缩段核心步骤：
@@ -172,9 +177,10 @@ SELECT /*+ ordered use_hash(a,b,c) */
 
 
 -- 表空间大小
-SELECT TABLESPACE_NAME, SUM(BYTES) / 1024 / 1024 MB
+SELECT TABLESPACE_NAME, TO_CHAR(SUM(BYTES) / 1024 / 1024) MB
   FROM DBA_FREE_SPACE
  GROUP BY TABLESPACE_NAME;
+
 
 -- 收缩空闲表空间
 SELECT /*+ ordered use_hash(a,c) */
