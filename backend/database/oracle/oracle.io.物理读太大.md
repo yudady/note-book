@@ -1,18 +1,5 @@
 # windows 2008 disk IO 过大问题
 
-
-
-
-back-134-test
-VN_@vb@F07gd%mV
-35.234.4.90
-10.140.1.68
-myPay
-DB 密码 eje93nf
-
-sqlplus myPay/eje93nf@mypay
-
-
 ![windows 2008 before](./images/20180531093454042.png)
 ---
 ![windows 2008 after](./images/20180531135347833.png)
