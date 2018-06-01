@@ -138,33 +138,87 @@ SELECT SN.USERNAME || '@' || SN.MACHINE,
 
 ---
 
--- 找出被lock资讯
-SELECT B.OBJECT_NAME OBJ_NAME,
-       A.ORACLE_USERNAME ORA_USER,
-       A.OS_USER_NAME OS_USER,
-       D.CTIME LOCK_SECOND_TIME,
-       C.SID ORACLE_SID,
-       C.SERIAL# ORACLE_SERIAL#,
-       C.MACHINE MACHINE,
-       C.PROGRAM PROGRAM,
-       TO_CHAR(D.LMODE) L,
-       TO_CHAR(D.REQUEST) R,
-       A.OBJECT_ID OBJ_ID,
-       A.PROCESS PID,
-       A.SESSION_ID S_ID,
-       P.SPID
-  FROM V$LOCKED_OBJECT A, ALL_OBJECTS B, V$SESSION C, V$LOCK D, V$PROCESS P
- WHERE A.OBJECT_ID = B.OBJECT_ID
-   AND C.PADDR = P.ADDR
-   AND A.SESSION_ID = C.SID
-   AND A.SESSION_ID = D.SID
-   AND D.TYPE = 'TX'
- ORDER BY D.CTIME DESC, P.SPID ;
+-- 找 lock 语句
+SELECT SN.USERNAME || '@' || SN.MACHINE,
+       '|SID->' || M.SID,
+       '|Serial->' || SN.SERIAL#,
+       '|Lock Type->' || M.TYPE,
+       DECODE(LMODE,
+              1,
+              'Null',
+              2,
+              'Row-S (SS)',
+              3,
+              'Row-X (SX)',
+              4,
+              'Share',
+              5,
+              'S/Row-X (SSX)',
+              6,
+              'Exclusive') LOCK_TYPE,
+       DECODE(REQUEST,
+              0,
+              'None',
+              1,
+              'Null',
+              2,
+              'Row-S (SS)',
+              3,
+              'Row-X (SX)',
+              4,
+              'Share',
+              5,
+              'S/Row-X (SSX)',
+              6,
+              'Exclusive') LOCK_REQUESTED,
+       '|Time (Sec)->' || M.CTIME "Time(sec)",
+       '|ID1->' || M.ID1,
+       '|ID2->' || M.ID2,
+       '|SQL Text->' || T.SQL_TEXT
+  FROM V$SESSION SN, V$LOCK M, V$SQLTEXT T
+ WHERE T.ADDRESS = SN.SQL_ADDRESS
+   AND T.HASH_VALUE = SN.SQL_HASH_VALUE
+   AND ((SN.SID = M.SID AND M.REQUEST != 0) OR
+       (SN.SID = M.SID AND M.REQUEST = 0 AND LMODE != 4 AND
+       (ID1, ID2) IN (SELECT S.ID1, S.ID2
+                          FROM V$LOCK S
+                         WHERE REQUEST != 0
+                           AND S.CTIME > 5
+                           AND S.ID1 = M.ID1
+                           AND S.ID2 = M.ID2)))
+ ORDER BY SN.USERNAME, SN.SID, T.PIECE;
+
 
 
 
 --- 把被lock的session杀掉
-ALTER SYSTEM KILL SESSION 'sid,serial#';
+SELECT 'alter system kill session ' || '''' || S.SID || ',' || S.SERIAL# || '''' || ';' KILL_SESSION_SQL,
+       S.SID,
+       S.SERIAL#,
+       S.LOCKWAIT,
+       S.STATUS,
+       S.SCHEMANAME,
+       S.MACHINE,
+       S.TERMINAL,
+       S.OSUSER,
+       S.PROGRAM,
+       S.MODULE,
+       S.ACTION,
+       S.LOGON_TIME,
+       L.ORACLE_USERNAME,
+       L.OS_USER_NAME,
+       L.LOCKED_MODE,
+       O.OWNER,
+       O.OBJECT_NAME,
+       O.OBJECT_TYPE,
+       O.STATUS
+
+  FROM V$SESSION S, V$LOCKED_OBJECT L, DBA_OBJECTS O
+ WHERE S.SID = L.SESSION_ID
+   AND L.OBJECT_ID = O.OBJECT_ID
+   AND S.SID IN (SELECT HOLDING_SESSION FROM DBA_WAITERS);
+
+
 
 ```
 
