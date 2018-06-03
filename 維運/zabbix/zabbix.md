@@ -1,4 +1,7 @@
-#zabbix 
+# zabbix 
+
+
+
 
 > 安裝 yum install 參考官方文檔
 
@@ -12,9 +15,28 @@
 zabbix_get -s 10.0.0.8 -k login-user
 
 
+[powershell UnsafeUserParameters](http://my-fish-it.blogspot.com/2017/03/ss-zabbix-32-userparameter-windows.html)
+
+[zabbix Windows-specific item keys](https://www.zabbix.com/documentation/3.4/manual/config/items/itemtypes/zabbix_agent/win_keys)
+
+[zabbix agent所支持的所有KEY](http://blog.51cto.com/skykws8023/1619075)
+
+---
+
+# 自動化的3種方法
+
+1. zabbix-agent主動註冊
+2. zabbix-server自動發現
+3. [zabbix API](https://www.zabbix.com/documentation/3.4/zh/manual/api/reference/host/create)
 
 
+---
 
+
+## Macros
+[Macros supported by location](https://www.zabbix.com/documentation/3.4/manual/appendix/macros/supported_by_location)
+
+[User macros](https://www.zabbix.com/documentation/3.4/manual/config/macros/usermacros)
 
 
 # orabbix 监控 (zabbix-trapper)
@@ -87,6 +109,9 @@ systemctl restart orabbix.service
 ```
 // C槽目前剩下多少空间
 zabbix_agentd.exe -t vfs.fs.size[C:,pfree]
+
+zabbix_agentd.exe -t net.if.list
+
 ```
 
 ## linux 档案填充0

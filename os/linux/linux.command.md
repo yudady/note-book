@@ -9,6 +9,9 @@ date -d '-14 days' '+%Y%m%d'
 find / -type f -name "*logstash*"
 
 
+## ssh
+ssh -l root 192.168.0.30
+
 ## 手动和时间服务器校准时间：
 
 ```

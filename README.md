@@ -1,17 +1,21 @@
-# 我的笔记本 （紙上得來終覺淺，絕知此事要躬行。）
+# 我的笔记本 （古之技術必有師，師者: 傳道、授業、解惑也。 古人學問無遺力，少壯工夫老始成； 紙上得來終覺淺，絕知此事要躬行。）
+
+
 
 > 真正的科學家，所有的基礎學科是全部掌握的，然後才會用這些基礎學科的知識服務于自己鑽研的方面。
 
 ---
 
-# TODO
+## TODO LIST
 
-GOOGLD 網站分析 百度統計
-[Piwik](https://matomo.org/)
-[Piwik ─ 足以匹敵 Google Analytics 的網站分析工具](https://blog.dcplus.com.tw/market/piwik)
+1. orabbix 源碼是如何跟server溝通
+- [source code](https://github.com/sboschman/orabbix)
 
+2. GOOGLD 網站分析 百度統計
+- [Piwik](https://matomo.org/)
+- [Piwik ─ 足以匹敵 Google Analytics 的網站分析工具](https://blog.dcplus.com.tw/market/piwik)
 
-
+3. line-bot
 - [line-bot-sdk-java](https://github.com/line/line-bot-sdk-java/blob/master/README.md)
 
 
