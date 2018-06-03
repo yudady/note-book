@@ -20,7 +20,7 @@ myPay   zonpay	/ mypay@zonvan
 
 
 
-外网IP  35.234.55.141	
+外网IP  訂單主機IP	
 内网IP  10.140.0.195
 
 
@@ -29,26 +29,27 @@ payment-test
 
 myPay / mypaycenter	/ myPay4Zv
 
-http://35.234.55.141/myPayNotifyCenter/monitor.jsp
+http://訂單主機IP/myPayNotifyCenter/monitor.jsp
 
 
 ## 主机登入
 
+訂單主機IP
 rd
-http://35.234.55.141/rd/admin/index.jsp#ajax/orderListMgmt.jsp          
+http://訂單主機IP/rd/admin/index.jsp#ajax/orderListMgmt.jsp          
     zonvan / Zonvan123
 
 
 myPay
-http://35.234.55.141/myPay/admin/index.jsp#ajax/merchantMgmt.jsp        
+http://訂單主機IP/myPay/admin/index.jsp#ajax/merchantMgmt.jsp        
     zonpay	/   mypay@zonvan
     tommy   /   Tommy123
 
 
-http://35.234.55.141/order/pc/index.jsp  订单
+http://訂單主機IP/order/pc/index.jsp  订单
 
 
-http://35.234.55.141/order/pc/odr.jsp?pageId=545
+http://訂單主機IP/order/pc/odr.jsp?pageId=545
 
 
 PY_MYPAY_MERCHANT  =>   IIH001  =>   ORDER_PAGE_ID = 415
@@ -66,7 +67,7 @@ QueryMyPayOrderController.class
 
 
 
-測試送單的網址ip 35.234.55.141 改成用 testapi.mypay2.com
+測試送單的網址ip 訂單主機IP 改成用 testapi.mypay2.com
 
 
 

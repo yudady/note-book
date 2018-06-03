@@ -1,4 +1,60 @@
-# zibbox ( orabbix agent )
+#zabbix 
+
+> 安裝 yum install 參考官方文檔
+
+
+## zabbix-agent 自定義用戶訊息
+> 加載被監控的主機上面，然後到server端測試可不可以拿到值
+![/etc/zabbix/zabbox_agented.conf](./images/2018-06-02_112506.png)
+格式:UserParameter=[key][value] , key必須在zabbix全局唯一
+
+> 在SERVER端（10.0.0.7）拿取客戶端（10.0.0.8）數據
+zabbix_get -s 10.0.0.8 -k login-user
+
+
+
+
+
+
+
+# orabbix 监控 (zabbix-trapper)
+
+
+[客户端自己提交数据给zabbix](http://www.ttlsa.com/zabbix/zabbix-trapper/)
+
+[zabbix trapper方式监控](http://blog.51cto.com/ityunwei2017/1895003)
+
+
+
+
+
+
+
+
+
+[zabbix通过orabbix和自定义脚本监控oracle数据库](https://blog.csdn.net/cuiyan1982/article/details/76889576)
+
+[Zabbix利用Orabbix插件监控Oracle数据库(增强版)--里面有orabbix报错的处理方法](https://blog.csdn.net/cuiyan1982/article/details/77051318)
+
+[orabbix 模板部分监控项取不到数据](https://blog.csdn.net/fengyingyuechou/article/details/75195978)
+
+[zabbix学习笔记：zabbix监控oracle](https://blog.csdn.net/linux_player_c/article/details/53005347)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## zabbox-server ( orabbix agent )
 
 systemctl status zabbix-server.service
 
