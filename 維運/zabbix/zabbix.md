@@ -91,10 +91,10 @@ systemctl status zabbix-server.service
 ![zabbix （orabbix） ubuntu path](./images/2018-05-28_110231.png)
 
 conf
-    config.props
-    query.props
+    config.props -- 监测数据的设定档
+    query.props -- sql (key)
 
-
+![oracle自订sql查询.（orabbix）](./images/20180605101950133.png)
 
 
 -- restart

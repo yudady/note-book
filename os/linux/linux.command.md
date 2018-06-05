@@ -1,16 +1,26 @@
-# date
+# 基本命令
 
-```
-10天前
-date -d '-14 days' '+%Y%m%d'
-```
+
+
+
+
+
+
+
+
+## date（10天前）
+> date -d '-14 days' '+%Y%m%d'
+
+## 提取有用的配置
+> cat zabbix_server.conf | grep ^[a-Z]
+
 
 ## find
-find / -type f -name "*logstash*"
+> find / -type f -name "*logstash*"
 
 
 ## ssh
-ssh -l root 192.168.0.30
+> ssh -l root 192.168.0.30
 
 ## 手动和时间服务器校准时间：
 
@@ -24,13 +34,9 @@ yum -y install ntpdate
 ```
 
 ## 找出最后一千行的 关键字(locks)
-```
-tail -n 1000 ./orabbix.log | grep locks
-```
+> tail -n 1000 ./orabbix.log | grep locks
 
 
 
-
-
-
-free -m
+## 查看memory
+> free -m
