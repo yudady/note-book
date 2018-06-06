@@ -29,5 +29,76 @@
 
 
 
+## fileBean windows 2008 配置介绍
+
+
+```
+首先，在Windows的powershell，將filebeat安裝成服務。 第一次使用的時候，會有簽章問題而無法執行，所以先在powershell中，不限制
+Set-ExecutionPolicy	Unrestricted 
+[Y]
+
+
+第二，執行安裝filebeat服務的ps，一樣在powershll中執行
+PS > cd 'C:\Program Files\Filebeat'
+PS C:\Program Files\Filebeat> .\install-service-filebeat.ps1
+[R]
+
+為了安全，可以再把未簽章執行限制放回去
+Set-ExecutionPolicy Restricted
+[Y]
+
+----------------------------------
+
+如果上面报错，则执行下面这个
+
+PowerShell -ExecutionPolicy Bypass -File C:\filebeat\install-service-filebeat.ps1
+
+```
+
+![filebean windows 2008 service](./images/20180606103529838.png)
+
+
+# filebeat.yml 设定档
+```
+
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - c:\Tomcat 8.5\logs\callbackLogStash\*
+    - c:\Tomcat 8.5\logs\redirectLogStash\*
+
+processors:
+ - decode_json_fields:
+     fields: ["mdc", "ndc", "exception","exception_class","exception_message","stacktrace","line_number","class","@version","source_host","ndc","message","thread_name","@timestamp","level","file","method","logger_name", ]
+     process_array: false
+     max_depth: 10
+     target: "filebeat"
+     overwrite_keys: false
+
+output.elasticsearch:
+  hosts: ["10.140.0.154:9200"]
+
+logging.level: debug
+
+logging.to_files: true
+logging.files:
+rotateeverybytes: 10485760 # = 10MB
+keepfiles: 7
+```
+
+
+
+
+
+
+curl -XPOST http://localhost:9200/zonpay-*/_search?pretty=true
+
+
+
+
+
+
+
+
 
 

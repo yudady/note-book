@@ -40,16 +40,12 @@ systemctl stop nginx
 ```
 
 
+## 注意 network 会挡住
 
+![elasticsearch.yml](./images/20180606122311405.png)
 
-
-
-
-
-
-
-
-
+service nginx restart
+systemctl status nginx
 
 
 

@@ -17,6 +17,7 @@
 
 ## find
 > find / -type f -name "*logstash*"
+> find / -type f -name "*elasticsearch*"
 
 
 ## ssh
