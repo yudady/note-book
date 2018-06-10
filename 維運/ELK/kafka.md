@@ -1,5 +1,5 @@
 # kafka
-
+[Kibana 用户手册](https://www.elastic.co/guide/cn/kibana/current/index.html)
 
 
 [ELK + kafka 日志方案](http://www.demodashi.com/demo/10181.html)

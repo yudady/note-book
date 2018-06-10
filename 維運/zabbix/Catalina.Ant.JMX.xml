@@ -1,0 +1,101 @@
+<project name="Catalina Ant JMX"
+         xmlns:jmx="antlib:org.apache.catalina.ant.jmx"
+         default="state"
+         basedir=".">
+
+    <!-- antlib: Copy your catalina-ant.jar from $CATALINA_HOME/lib to $ANT_HOME/lib. -->
+
+
+    <property name="jmx.server.name" value="35.234.44.204"/>
+    <property name="jmx.server.port" value="9999"/>
+    <property name="cluster.server.address" value="35.234.44.204"/>
+    <property name="cluster.server.port" value="9999"/>
+
+    <target name="state" description="Show JMX Cluster state">
+        <jmx:open
+                host="${jmx.server.name}"
+                port="${jmx.server.port}"
+                username="controlRole"
+                password="tomcat"/>
+        <jmx:get
+                name=
+                        "Catalina:type=IDataSender,host=localhost,
+senderAddress=${cluster.server.address},senderPort=${cluster.server.port}"
+                attribute="connected"
+                resultproperty="IDataSender.backup.connected"
+                echo="false"
+        />
+        <jmx:get
+                name="Catalina:type=ClusterSender,host=localhost"
+                attribute="senderObjectNames"
+                resultproperty="senderObjectNames"
+                echo="false"
+        />
+        <!-- get current maxActiveSession from ClusterTest application
+           echo it to Ant output and store at
+           property <em>clustertest.maxActiveSessions.orginal</em>
+        -->
+        <jmx:get
+                name="Catalina:type=Manager,context=/ClusterTest,host=localhost"
+                attribute="maxActiveSessions"
+                resultproperty="clustertest.maxActiveSessions.orginal"
+                echo="true"
+        />
+        <!-- set maxActiveSession to 100
+        -->
+        <jmx:set
+                name="Catalina:type=Manager,context=/ClusterTest,host=localhost"
+                attribute="maxActiveSessions"
+                value="100"
+                type="int"
+        />
+        <!-- get all sessions and split result as delimiter <em>SPACE</em> for easy
+           access all session ids directly with Ant property sessions.[0..n].
+        -->
+        <jmx:invoke
+                name="Catalina:type=Manager,context=/ClusterTest,host=localhost"
+                operation="listSessionIds"
+                resultproperty="sessions"
+                echo="false"
+                delimiter=" "
+        />
+        <!-- Access session attribute <em>Hello</em> from first session.
+        -->
+        <jmx:invoke
+                name="Catalina:type=Manager,context=/ClusterTest,host=localhost"
+                operation="getSessionAttribute"
+                resultproperty="Hello"
+                echo="false"
+        >
+            <arg value="${sessions.0}"/>
+            <arg value="Hello"/>
+        </jmx:invoke>
+        <!-- Query for all application manager.of the server from all hosts
+           and bind all attributes from all found manager MBeans.
+        -->
+        <jmx:query
+                name="Catalina:type=Manager,*"
+                resultproperty="manager"
+                echo="true"
+                attributebinding="true"
+        />
+        <!-- echo the create properties -->
+        <echo>
+            senderObjectNames: ${senderObjectNames.0}
+            IDataSender.backup.connected: ${IDataSender.backup.connected}
+            session: ${sessions.0}
+            manager.length: ${manager.length}
+            manager.0.name: ${manager.0.name}
+            manager.1.name: ${manager.1.name}
+            hello: ${Hello}
+            manager.ClusterTest.0.name: ${manager.ClusterTest.0.name}
+            manager.ClusterTest.0.activeSessions: ${manager.ClusterTest.0.activeSessions}
+            manager.ClusterTest.0.counterSend_EVT_SESSION_EXPIRED:
+            ${manager.ClusterTest.0.counterSend_EVT_SESSION_EXPIRED}
+            manager.ClusterTest.0.counterSend_EVT_GET_ALL_SESSIONS:
+            ${manager.ClusterTest.0.counterSend_EVT_GET_ALL_SESSIONS}
+        </echo>
+
+    </target>
+
+</project>

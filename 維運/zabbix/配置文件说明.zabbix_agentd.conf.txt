@@ -1,0 +1,37 @@
+############一般参数############
+# PidFile=/tmp/zabbix_agentd.pid           #pid文件位置
+LogFile=/tmp/zabbix_agentd.log             #log文件的位置，如果不设置则使用syslog也就是写入/var/log/message
+# LogFileSize=1                            #日志轮询大小默认是1MB
+# DebugLevel=3                             #日志级别
+# SourceIP=                                #出站连接的源IP地址，当系统有多个IP的时候需要制定哪个IP与代理或服务端通信
+# EnableRemoteCommands=0                   #是否允许来自Zabbix服务器的远程命令。0为不允许，1为允许。
+# LogRemoteCommands=0                      #是否开启日志记录shell命令作为警告，0表示不允许，1表示允许。
+#####被动检查相关(被动模式：被动模式下，由代理或服务端主动请求AGENT，去获取所采集到的监控数据)
+Server=192.168.1.103                       #在有代理情况下，此IP地址应该填写代理服务器的IP，反之，若无代理服务器，则此IP应设置为服务端，多IP用逗号隔开
+# ListenPort=10050                         #agent的监听服务端或者代理的连接端口，范围是1024-32767，默认是10050
+# ListenIP=0.0.0.0                         #监听IP
+# StartAgents=3                            #在被动模式下，agent启动时启动的子进程数量，范围是0-100, 如果设置为0，则禁用被动检查，并且代理将不会在任何TCP端口上侦听。
+#####主动检查相关（主动模式：在主动模式下，AGENT端（即采集客户端）将所采集的结果，主动提交给代理服务器或服务器，而此种情况下，代理服务器或服务器将被动接收采集信息）
+# ServerActive=                            #主动模式下，代理端口的IP，如果没有指定端口则默认为10051端口，若需要更改端口，则为IP:port的形式
+# Hostname=                                #唯一，区分大小写的主机名。需要活动检查，并且必须与服务器上配置的主机名匹配。 如果未定义，则从HostnameItem获取值。手工自定义一个主机名，可以和系统的主机名一样，也可以不一样
+# HostnameItem=system.hostname             #这里的优先级低于上面的Hostname。system.hostname是ZABBIX内置的一个自动获取主机名的方法
+# HostMetadata=                            #用于定义当前主机唯一标识符，范围是0-255，仅适用于自动发现情况下，默认不定义。如果未定义，则将从HostMetadataItem获取值。
+# HostMetadataItem=                        #定义用于获取主机元数据的项目的可选参数。主机自动注册过程使用主要的元数据。 在自动注册请求期间，如果指定项目返回的值超过255个字符，代理将记录一条警告消息。 仅当未定义HostMetadata时才使用此选项。
+# RefreshActiveChecks=120                  #被监控的主机多久（秒）重新请求代理或服务端刷新一监控列表。范围为60-3600秒。ZABBIX运行原理为：，zabbix客户端启动后，在等待RefreshActiveChecks秒后，
+#开始从代理或服务端请求并下载监控项信息，保存在本地专门的buffersend中，再过RefreshActiveChecks秒后，重新获取监控项信息。这就是为什么当配置监控项，要过一会才能生效的原因。这个数值，就是等待时间。建议，不要将此数值设置过小，以免加大AGENT端和服务端及数据库的压力，建议为120秒。
+# BufferSend=5                             #多少秒后，将BUFFER中的数据提交到代理或服务端。范围（1-3600）此数值的大小决定了采集后，提交数据的及时性，数值越小，则提交得越频繁，
+#对服务器压力越大，同时对AGENT端系统资源消耗越大，则表现出来的现象是报警非常及时，建议根据实际情况自行考虑，也可保持默认，若发现ZABBIX消耗资源较多，建议加大此数值。
+# BufferSize=100                           #此参数作用设置保存采集数据在内存中的容量大小。若此agent端监控项较多，建议加大此数值。BufferSize与BufferSend之间有联系的。当达到bUFFERSEND或Buffersize已满时，都会触发数据提交动作。范围是2-65535
+# MaxLinesPerSecond=100                    #代理将每秒发送到Zabbix服务器或代理处理的最大新行数，范围是1-1000
+############高级参数############
+# Default:                                 #设置项目键的别名。 它可以用来代替较长和更简单的长而复杂的项目密钥。可能存在多个别名参数。 不允许具有相同别名键的多个参数。 不同的别名键可以引用相同的项目键。例如：Alias=zabbix.userid:vfs.file.regexp[/etc/passwd,^zabbix:.:([0-9]+),,,,\1]
+# Timeout=3                                #gant采集一个数据的超时时间，但是是秒，范围是1-30
+# AllowRoot=0                              #是否允许ROOT帐号运行此客户端。0：不允许，1:允许
+# User=zabbix                              #运行agent的用户
+# Include=                                 #加载目录路径或扩展配置文件路径
+#######用户定义的监控参数#######
+# UnsafeUserParameters=0                   #是否启用用户自定义监控脚本，1启用，0不启用。由于ZABBIX实现监控方法的多样性，一般都采用脚本来实现监控数据的采集，所以，建议开启，否则功能将受限。
+# UserParameter=                           #用户定义的参数进行监控。 可以有几个用户定义的参数。格式：UserParameter = <key>，<shell命令>请参见“zabbix_agentd”目录中的示例。
+#######扩展模块#######
+# LoadModulePath=${libdir}/modules         #扩展模块路径
+# LoadModule=                              #扩展模块路径
