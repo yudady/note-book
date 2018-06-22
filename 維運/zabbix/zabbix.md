@@ -3,8 +3,8 @@
 
 
 
-> 安裝 yum install 參考官方文檔
 
+> 安裝 yum install 參考官方文檔
 
 ---
 
@@ -29,12 +29,30 @@
 
 systemctl status zabbix-server.service
 
-## zabbix server conf(zabbix设定档)
+
 
 ![zabbix_server.conf  zabbix设定档 ](./images/2018-05-29_103000.png)
 
 
+## Zabbix busy XXX
+```
+Zabbix busy trapper processes, in %                   StartTrappers=5
+Zabbix busy poller processes, in %                      StartPollers=5
+Zabbix busy ipmi poller processes, in %               StartIPMIPollers=0
+Zabbix busy discoverer processes, in %                StartDiscoverers=1
+Zabbix busy icmp pinger processes, in %              StartPingers=1
+Zabbix busy http poller processes, in %                StartHTTPPollers=1
+Zabbix busy proxy poller processes, in %              StartProxyPollers=1
+Zabbix busy unreachable poller processes, in %    StartPollersUnreachable=1
+Zabbix busy java poller processes, in %                 StartJavaPollers=0
+Zabbix busy snmp trapper processes, in %            StartSNMPTrapper=0
+Zabbix busy vmware collector processes, in %       StartVMwareCollectors=0
 
+作者：Roles_乐
+链接：https://www.jianshu.com/p/077e49960de4
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
 
 
 

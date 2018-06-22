@@ -1,0 +1,976 @@
+{
+	"info": {
+		"_postman_id": "6b9e2238-d38b-44c9-861b-44c8391b34a2",
+		"name": "MYPAY客戶.os.screen.add.by.cust",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "00 zabbix_login and 设定客户",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "596bc8a0-2e42-4753-81f6-cf6cb54ee99c",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"console.log(responseData.result);",
+							"// 设置全局变量",
+							"pm.environment.set(\"auth\", responseData.result );",
+							"",
+							"",
+							"var custNum = \"060\";",
+							"console.log(custNum);",
+							"pm.environment.set(\"custNum\", custNum);",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"user.login\",\r\n    \"params\": {\r\n        \"user\": \"tommy\",\r\n        \"password\": \"tommy\"\r\n    },\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				},
+				"description": "获取 SESSIONID"
+			},
+			"response": []
+		},
+		{
+			"name": "Step01 admin host.get 方法请求找到hostid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58343847-ece1-4c76-9fd6-41d6cf7f1e11",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"var hostid = responseData.result[0].hostid;",
+							"console.log(hostid);",
+							"pm.environment.set(\"hostid\", hostid);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"host.get\",\r\n    \"params\": {\r\n        \"output\": [\"hostid\",\"host\"],\r\n        \"filter\": {\r\n            \"host\": [\r\n                \"{{custNum}}Admin\"\r\n            ]\r\n        }\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step02-x0-0 admin item.get 找到itemid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a33f225-1946-426e-b923-46fe055916df",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"var itemid = responseData.result[0].itemid;",
+							"console.log(itemid);",
+							"// 设置全局变量",
+							"pm.environment.set(\"itemid\",itemid);",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"item.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"hostids\": \"{{hostid}}\",\r\n        \"search\": {\r\n        \t\"name\": \"cpu monitor\",\r\n            \"key_\": \"system\"\r\n        },\r\n        \"sortfield\": \"name\"\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step02-x0-1 graphs_items.get找到resourceid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc517282-ac96-4f52-8c46-f672f59286f8",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"// 设置全局变量",
+							"var resourceid = responseData.result[0].graphid;",
+							"pm.environment.set(\"resourceid\", resourceid);",
+							"",
+							"console.log(resourceid);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"graphitem.get\",\r\n    \"params\": {\r\n    \t\"itemids\": \"{{itemid}}\",\r\n        \"output\": \"extend\"\r\n        \r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step02-x0-2 screenitem.create增加到X0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2dd6874-52cc-4a87-b826-993f5df8fbb6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"screenitem.create\",\r\n    \"params\": {\r\n        \"screenid\": {{screenid}},\r\n        \"resourcetype\": 0,\r\n        \"resourceid\": {{resourceid}},\r\n        \"x\": 0,\r\n        \"y\": {{y}}\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step03-x1-0 admin item.get 找到itemid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69f398a2-34ac-4b5e-8534-2a69b207e67d",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"var itemid = responseData.result[0].itemid;",
+							"console.log(itemid);",
+							"// 设置全局变量",
+							"pm.environment.set(\"itemid\",itemid);",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"item.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"hostids\": \"{{hostid}}\",\r\n        \"search\": {\r\n        \t\"name\": \"Free memory\"\r\n        },\r\n        \"sortfield\": \"name\"\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step03-x1-1 graphs_items.get找到resourceid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc517282-ac96-4f52-8c46-f672f59286f8",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"// 设置全局变量",
+							"var resourceid = responseData.result[0].graphid;",
+							"pm.environment.set(\"resourceid\", resourceid);",
+							"",
+							"console.log(resourceid);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"graphitem.get\",\r\n    \"params\": {\r\n    \t\"itemids\": \"{{itemid}}\",\r\n        \"output\": \"extend\"\r\n        \r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step03-x1-2 screenitem.create增加到X1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2dd6874-52cc-4a87-b826-993f5df8fbb6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"screenitem.create\",\r\n    \"params\": {\r\n        \"screenid\": {{screenid}},\r\n        \"resourcetype\": 0,\r\n        \"resourceid\": {{resourceid}},\r\n        \"x\": 1,\r\n        \"y\": {{y}}\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step04-x2-0 admin item.get 找到itemid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7ff555a6-f857-42e6-8d27-0df19623c2f8",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"var itemid = responseData.result[0].itemid;",
+							"console.log(itemid);",
+							"// 设置全局变量",
+							"pm.environment.set(\"itemid\",itemid);",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"item.get\",\n    \"params\": {\n        \"output\": \"extend\",\n        \"hostids\": \"{{hostid}}\",\n        \"search\": {\n            \"name\": \"Processes\",\n            \"key_\":\"procnum\"\n        },\n        \"sortfield\": \"name\"\n    },\n    \"auth\": \"{{auth}}\",\n    \"id\": 1\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step04-x2-1 graphs_items.get找到resourceid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc517282-ac96-4f52-8c46-f672f59286f8",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"// 设置全局变量",
+							"var resourceid = responseData.result[0].graphid;",
+							"pm.environment.set(\"resourceid\", resourceid);",
+							"",
+							"console.log(resourceid);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"graphitem.get\",\r\n    \"params\": {\r\n    \t\"itemids\": \"{{itemid}}\",\r\n        \"output\": \"extend\"\r\n        \r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step04-x2-2 screenitem.create增加x2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2dd6874-52cc-4a87-b826-993f5df8fbb6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"screenitem.create\",\r\n    \"params\": {\r\n        \"screenid\": {{screenid}},\r\n        \"resourcetype\": 0,\r\n        \"resourceid\": {{resourceid}},\r\n        \"x\": 2,\r\n        \"y\": {{y}}\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "screen y + 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89c7d9fb-812e-4c6e-a5bd-ba609ac3b8d6",
+						"type": "text/javascript",
+						"exec": [
+							"var conY = parseInt(pm.environment.get(\"y\")) + 1;",
+							"console.log(conY);",
+							"pm.environment.set(\"y\", conY);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"usergroup.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"status\": 0\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step05 order host.get 方法请求找到hostid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58343847-ece1-4c76-9fd6-41d6cf7f1e11",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"var hostid = responseData.result[0].hostid;",
+							"console.log(hostid);",
+							"pm.environment.set(\"hostid\", hostid);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"host.get\",\r\n    \"params\": {\r\n        \"output\": [\"hostid\",\"host\"],\r\n        \"filter\": {\r\n            \"host\": [\r\n                \"{{custNum}}Order\"\r\n            ]\r\n        }\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step05-x0-0 order item.get 找到itemid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a33f225-1946-426e-b923-46fe055916df",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"var itemid = responseData.result[0].itemid;",
+							"console.log(itemid);",
+							"// 设置全局变量",
+							"pm.environment.set(\"itemid\",itemid);",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"item.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"hostids\": \"{{hostid}}\",\r\n        \"search\": {\r\n\t\t\t\"key_\": \"system.cpu.util[,idle]\"\r\n        },\r\n        \"sortfield\": \"name\"\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step05-x0-1 graphs_items.get找到resourceid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc517282-ac96-4f52-8c46-f672f59286f8",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"// 设置全局变量",
+							"var resourceid = responseData.result[0].graphid;",
+							"pm.environment.set(\"resourceid\", resourceid);",
+							"",
+							"console.log(resourceid);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"graphitem.get\",\r\n    \"params\": {\r\n    \t\"itemids\": \"{{itemid}}\",\r\n        \"output\": \"extend\"\r\n        \r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step05-x0-2 screenitem.create增加到X0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2dd6874-52cc-4a87-b826-993f5df8fbb6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"screenitem.create\",\r\n    \"params\": {\r\n        \"screenid\": {{screenid}},\r\n        \"resourcetype\": 0,\r\n        \"resourceid\": {{resourceid}},\r\n        \"x\": 0,\r\n        \"y\": {{y}}\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step06-x1-0 admin item.get 找到itemid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69f398a2-34ac-4b5e-8534-2a69b207e67d",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"var itemid = responseData.result[0].itemid;",
+							"console.log(itemid);",
+							"// 设置全局变量",
+							"pm.environment.set(\"itemid\",itemid);",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"item.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"hostids\": \"{{hostid}}\",\r\n        \"search\": {\r\n        \t\"name\": \"Available memory\"\r\n        },\r\n        \"sortfield\": \"name\"\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step06-x1-1 graphs_items.get找到resourceid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc517282-ac96-4f52-8c46-f672f59286f8",
+						"type": "text/javascript",
+						"exec": [
+							"// 将返回信息解析成对象",
+							"var responseData = JSON.parse(responseBody);",
+							"",
+							"// 设置全局变量",
+							"var resourceid = responseData.result[0].graphid;",
+							"pm.environment.set(\"resourceid\", resourceid);",
+							"",
+							"console.log(resourceid);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"graphitem.get\",\r\n    \"params\": {\r\n    \t\"itemids\": \"{{itemid}}\",\r\n        \"output\": \"extend\"\r\n        \r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Step06-x1-2 screenitem.create增加到X1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2dd6874-52cc-4a87-b826-993f5df8fbb6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"screenitem.create\",\r\n    \"params\": {\r\n        \"screenid\": {{screenid}},\r\n        \"resourcetype\": 0,\r\n        \"resourceid\": {{resourceid}},\r\n        \"x\": 1,\r\n        \"y\": {{y}}\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "screen y + 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89c7d9fb-812e-4c6e-a5bd-ba609ac3b8d6",
+						"type": "text/javascript",
+						"exec": [
+							"var conY = parseInt(pm.environment.get(\"y\")) + 1;",
+							"console.log(conY);",
+							"pm.environment.set(\"y\", conY);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"usergroup.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"status\": 0\r\n    },\r\n    \"auth\": \"{{auth}}\",\r\n    \"id\": 1\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.30/zabbix/api_jsonrpc.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"30"
+					],
+					"path": [
+						"zabbix",
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
