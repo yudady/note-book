@@ -3,6 +3,11 @@
 > zabbix_get -s GCP_IP -k "net.if.out[eth0]"
 
 
+
+
+
+zabbix_get -s 35.201.241.7 -k "system.cpu.util[,idle]"
+
 zabbix_get -s 35.201.241.7 -k "vm.memory.size[free]"
 zabbix_get -s 35.201.241.7 -k "vm.memory.size[available]"
 zabbix_get -s 35.201.162.67 -k "vm.memory.size[free]"

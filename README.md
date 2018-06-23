@@ -26,13 +26,6 @@
 - [line-bot-sdk-java](https://github.com/line/line-bot-sdk-java/blob/master/README.md)
 
 
-
-
-
-
-
-
-
 ---
 
 ## chrome 直接显示 Markdown 文档
