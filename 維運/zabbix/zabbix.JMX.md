@@ -1,4 +1,9 @@
 # Zabbix.JMX
+> 利用jvisualvm找出key
+![jvisualvm](./images/360截图20180623135140013.png)
+
+![key](./images/360截图20180623140149579.png)
+
 
 
 

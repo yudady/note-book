@@ -15,8 +15,6 @@
 
 ## TODO LIST
 
-1. orabbix 源碼是如何跟server溝通
-- [source code](https://github.com/sboschman/orabbix)
 
 2. GOOGLD 網站分析 百度統計
 - [Piwik](https://matomo.org/)
@@ -25,13 +23,22 @@
 3. line-bot
 - [line-bot-sdk-java](https://github.com/line/line-bot-sdk-java/blob/master/README.md)
 
+4. [nodejs.chrome.spilder](https://pptr.dev/)
+
+
+
+
 
 ---
 
 ## chrome 直接显示 Markdown 文档
 [Markdown Preview Plus => chrome plugin](https://chrome.google.com/webstore/detail/markdown-preview-plus/febilkbfcbhebfnokafefeacimjdckgl)
 
+## chrome Server IP: https://chrome.google.com/webstore/detail/server-ip/lllhkijapbmlekoldcoohglpihmcjdgj
 
+## chrome ShowIP: https://chrome.google.com/webstore/detail/showip/agoljmemkbciolpigpabjfkagboolkcj
+
+shareim
 
 ## 我的免费域名
 - http://yudady.tplinkdns.com
