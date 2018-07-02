@@ -3,6 +3,22 @@
 > zabbix_get -s GCP_IP -k "net.if.out[eth0]"
 
 
+zabbix_get -s 35.194.156.252 -k "proc.num[java.exe,]"
+zabbix_get -s 35.194.156.252 -k "proc_info[java.exe,pf,avg]"
+
+
+
+windows
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[C:,free]"
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[C:,pfree]"
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[C:,total]"
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[C:,used]"
+linux
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[/,free]"
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[/,pfree]"
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[/,total]"
+zabbix_get -s 35.185.159.211 -k "vfs.fs.size[/,used]"
+
 
 
 
