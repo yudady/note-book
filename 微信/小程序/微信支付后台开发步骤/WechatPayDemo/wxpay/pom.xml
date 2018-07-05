@@ -22,11 +22,11 @@
         <slf4j.version>1.6.4</slf4j.version>
         <jetty.version>7.6.3.v20120416</jetty.version>
         <javax.validation.version>1.0.0.GA</javax.validation.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <unitils.version>3.3</unitils.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>

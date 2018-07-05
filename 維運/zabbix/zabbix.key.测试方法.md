@@ -3,8 +3,8 @@
 > zabbix_get -s GCP_IP -k "net.if.out[eth0]"
 
 
-zabbix_get -s 35.194.156.252 -k "proc.num[java.exe,]"
-zabbix_get -s 35.194.156.252 -k "proc_info[java.exe,pf,avg]"
+zabbix_get -s 35.201.174.162 -k "proc.num[java.exe,]"
+zabbix_get -s 35.201.174.162 -k "proc_info[java.exe,pf,avg]"
 
 
 

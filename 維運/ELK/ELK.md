@@ -15,7 +15,7 @@ cd /etc/elasticsearch/
 ---------------------------------
 啟動 ELK
 systemctl start elasticsearch
-systemctl start logstash
+systemctl start logstash(已停止)，使用firebean直接送到ela
 systemctl start kibana
 systemctl start nginx
 ---------------------------------
@@ -40,6 +40,9 @@ systemctl stop nginx
 ```
 
 
+
+
+
 ## 注意 network 会挡住
 
 ![elasticsearch.yml](./images/20180606122311405.png)
@@ -48,9 +51,14 @@ service nginx restart
 systemctl status nginx
 
 
+systemctl restart elasticsearch
+systemctl restart kibana
+systemctl restart nginx
 
 
 
+systemctl stop firewalld
+systemctl disable firewalld.service
 
 ## logstash-*
 > 像logstash-*这样命名的indices会应用默认的logstash index模板
@@ -63,7 +71,7 @@ curl "http://localhost:9200/_cat/indices?v&h=i"
 
 删除Indices
 curl -XDELETE "localhost:9200/zonpay-2018.01*"
-curl -XDELETE "localhost:9200/zonpay-2018.02*"
+curl -XDELETE "localhost:9200/zonpay-*"
 
 
 删除30天前资料

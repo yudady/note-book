@@ -1,3 +1,34 @@
+# jrebel
+![](./images/20180704100137.png)
+```
+-Dfile.encoding=UTF-8 -noverify -agentpath:C:/Users/yu_da/.jrebel/jrebel64.dll 
+```
+![](./images/20180704100838.png)
+
+## rebel.xml(Intellij)
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
+
+	<classpath>
+		<dir name="D:/zonvan/coding/myPay/out/artifacts/myPay/WEB-INF/classes">
+		</dir>
+	</classpath>
+
+	<web>
+		<link target="/">
+			<dir name="D:/zonvan/coding/myPay/out/artifacts/myPay">
+			</dir>
+		</link>
+	</web>
+
+</application>
+```
+
+
+
+
+
 # Jrebel & Jet Brains License Server for Java
 
 ```
