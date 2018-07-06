@@ -18,6 +18,15 @@
 
 
 
+## markdown 2 html
+```
+安装
+npm install -g markdown-it
+
+md 转换 html(open bash)
+markdown-it ZabbixSender.md -o ZabbixSender.html
+
+```
 
 
 ---

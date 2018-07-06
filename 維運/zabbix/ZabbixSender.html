@@ -1,0 +1,28 @@
+<h1>Zabbix sender , zabbix trapper(主动发送数据给zabbix-server)</h1>
+<p><img src="./images/360%E6%88%AA%E5%9B%BE20180623133534695.png" alt="往server送数据"></p>
+<h2>zabbix-sender主动发送数据给zabbix-server</h2>
+<p><img src="./images/360%E6%88%AA%E5%9B%BE20180623141209680.png" alt=""></p>
+<h2>orabbix 利用此方法来拿到oracle数据</h2>
+<p><img src="./images/360%E6%88%AA%E5%9B%BE20180623134347908.png" alt=""></p>
+<p><a href="https://github.com/sboschman/orabbix">orabbix source code</a>
+<a href="https://www.zabbix.com/documentation/3.4/manpages/zabbix_sender">ZABBIX_SENDER</a></p>
+<p><a href="https://github.com/hengyunabc/zabbix-sender">java zabbix-sender</a></p>
+<pre><code>String host = &quot;127.0.0.1&quot;;
+int port = 10051;
+ZabbixSender zabbixSender = new ZabbixSender(host, port);
+
+DataObject dataObject = new DataObject();
+dataObject.setHost(&quot;172.17.42.1&quot;);
+dataObject.setKey(&quot;test_item&quot;);
+dataObject.setValue(&quot;10&quot;);
+// TimeUnit is SECONDS.
+dataObject.setClock(System.currentTimeMillis()/1000);
+SenderResult result = zabbixSender.send(dataObject);
+
+System.out.println(&quot;result:&quot; + result);
+if (result.success()) {
+    System.out.println(&quot;send success.&quot;);
+} else {
+    System.err.println(&quot;sned fail!&quot;);
+}
+</code></pre>
