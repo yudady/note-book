@@ -114,14 +114,15 @@ yum install zabbix-web-mysql
 ```
 shell> mysql -uroot -p
 mysql> create database zabbix character set utf8 collate utf8_bin;
-mysql> grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';
+mysql> grant all privileges on zabbix.* to 'zabbix'@'localhost' identified by 'zabbix';
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'zabbix'@'%' IDENTIFIED BY 'zabbix';
-flush privileges;
-
+mysql> flush privileges;
 mysql> quit;
 ```
 ![](./images/20180706144059.png)
+
 ![](./images/20180706144904.png)
+
 ![](./images/20180706145713.png)
 
 
@@ -169,7 +170,46 @@ systemctl restart httpd.service
 yum install zabbix-agent
 ```
 ![](./images/20180706153707.png)
+
 ![](./images/20180706153852.png)
+
+
+
+
+## 准备开始
+
+http://35.236.140.178/zabbix/setup.php
+
+![](./images/20180709103433.png)
+
+![](./images/20180709103945.png)
+
+![](./images/20180709104034.png)
+
+![](./images/20180709104131.png)
+
+![](./images/20180709104204.png)
+
+![](./images/20180709104243.png)
+
+![](./images/20180709104338.png)
+
+![](./images/20180709104425.png)
+
+
+## zabbix_agentd.conf设定
+![](./images/20180709111750.png)
+
+
+
+## 客户100主机测试
+
+
+
+
+
+
+
 
 
 

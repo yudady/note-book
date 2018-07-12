@@ -22,10 +22,12 @@
 ```
 安装
 npm install -g markdown-it
-
+npm install -g markdown-pdf
 md 转换 html(open bash)
-markdown-it ZabbixSender.md -o ZabbixSender.html
+markdown-it gcp.安装.zabbix.md -o gcp.安装.zabbix.html
 
+md 转换 pdf(open bash)
+markdown-pdf gcp.安装.zabbix.md -o gcp.安装.zabbix.pdf
 ```
 
 
@@ -43,6 +45,7 @@ shareim
 ## 我的免费域名
 - http://yudady.tplinkdns.com
 - http://yudady.dynu.net
+- http://www.yudady.tk
 
 
 
