@@ -14,10 +14,11 @@
 ## 检查SELinux
 ![检查SELinux](./images/20180706152600.png)
 
+
 ## 检查firewalld
 ![检查firewalld](./images/20180706152915.png)
 
-## 安裝 MySQL Repository
+## 安裝 MySQL yum 源
 ```
 rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
 ```
@@ -53,10 +54,8 @@ systemctl status mysqld.service
 ```
 
 
-
-
-
 ![yum install](./images/20180706135817.png)
+
 
 ## MySQL 預設為空密碼, 執行以下指令修改
 ```
@@ -73,7 +72,7 @@ flush privileges;
 
 ---
 
-## 安装zabbix源码库配置部署包
+## 安装 zabbix yum 源
 ```
 RHEL 7:
 
@@ -86,10 +85,7 @@ yum-config-manager --enable rhel-7-server-optional-rpms
 ![](./images/20180706141316.png)
 
 
-
-
-
-## Server/proxy/frontend installation
+## zabbix server 安装
 ```
 yum install zabbix-server-mysql
 ```
@@ -97,20 +93,20 @@ yum install zabbix-server-mysql
 
 
 
-## Server/proxy/frontend installation
+## zabbix mysql 安装
 ```
 yum install zabbix-proxy-mysql
 ```
 ![yum install](./images/20180706141817.png)
 
 
-## install Zabbix frontend
+## zabbix php 安装
 ```
 yum install zabbix-web-mysql
 ```
 ![yum install](./images/20180706142019.png)
 
-## Create the database using the provided instructions for MySQL
+## mysql 资料库 
 ```
 shell> mysql -uroot -p
 mysql> create database zabbix character set utf8 collate utf8_bin;
@@ -126,7 +122,7 @@ mysql> quit;
 ![](./images/20180706145713.png)
 
 
-## Importing data
+## 汇入schema
 ```
 cd /usr/share/doc/zabbix-server-mysql-3.4.11
 ```
@@ -142,19 +138,20 @@ zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbi
 ![](./images/20180706151332.png)
 
 
-## zabbix server conf
+## 修改 zabbix-server.conf
 ```
 vim /etc/zabbix/zabbix_server.conf
 ```
 
-## 启动zabbix server
+## 启动 zabbix server
 ```
 systemctl status zabbix-server.service
+systemctl restart zabbix-server.service
 ```
 ![](./images/20180706151926.png)
 
 
-## 变更php的timezone
+## 变更php的时区
 ![](./images/20180706152326.png)
 
 
@@ -165,7 +162,7 @@ systemctl restart httpd.service
 ![](./images/20180706153525.png)
 
 
-## zabbix-agent installation
+## zabbix-agent 安装
 ```
 yum install zabbix-agent
 ```
@@ -176,7 +173,7 @@ yum install zabbix-agent
 
 
 
-## 准备开始
+## zabbix web 准备开始
 
 http://35.236.140.178/zabbix/setup.php
 
@@ -296,6 +293,51 @@ ln -s '/usr/lib/systemd/system/zabbix-java-gateway.service' '/etc/systemd/system
 systemctl restart zabbix-server
 ```
 
+## orabbix 安装
+```
+cd /opt
+mkdir orabbix
+rz orabbix-1.2.3.zip
+unzip orabbix-1.2.3.zip
+chmod 777 -R /opt/orabbix
+cd conf
+```
+
+![](./images/20180712155244.png)
+
+### 复制orabbix启动文件到etc目录下
+```
+cp /opt/orabbix/init.d/orabbix /etc/init.d/orabbix
+
+
+chkconfig --add orabbix
+chkconfig orabbix on
+systemctl enable orabbix.service
+/etc/init.d/orabbix start
+```
+
+![](./images/20180712160603.png)
+
+
+
+### orabbix配置设定
+![](./images/20180712163459.png)
+```
+vim /opt/orabbix/conf/config.props
+```
+
+
+## 中文乱码处理
+> 下载 simkai.ttf 字形库
+
+![](./images/20180712171419.png)
+
+```
+vim /usr/share/zabbix/include/defines.inc.php
+
+graphfont 换成 simkai
+```
+
 # 客戶212(暫停使用)  mypay-bab  主机测试
 
 
@@ -357,14 +399,15 @@ vim /etc/systemd/system/tomcat.service
 ![](./images/20180712150107.png)
 
 ```
+
 systemctl disable tomcat.service
 systemctl enable tomcat.service
 systemctl restart tomcat.service
 systemctl status tomcat.service
+
 ```
 
-
-## 新增 Media types
+## 新增 Media types(通知器)
 
 ```
 cd /usr/lib/zabbix/alertscripts
@@ -375,53 +418,42 @@ cd /usr/lib/zabbix/alertscripts
 ![](./images/20180712152412.png)
 
 
-## 新增 Action
+## 新增 Action(触发器)
 
 ![](./images/20180712153813.png)
 
 
+# zabbix 汇出 汇入
 
-## orabbix
+> GCP.zabbix 侦测需要使用内网IP
+
+## Templates
+
+![Templates export import](./images/20180713105444.png)
+
+## Hosts
+
+![Hosts export import](./images/20180713105608.png)
+
+
+
+## TODO web icon 图片消失
+
+/etc/httpd/conf/httpd.conf
 ```
-cd /opt
-mkdir orabbix
-rz orabbix-1.2.3.zip
-unzip orabbix-1.2.3.zip
-chmod 777 -R /opt/orabbix
-cd conf
-```
+vim /etc/httpd/conf/httpd.conf
 
-![](./images/20180712155244.png)
-
-### 复制orabbix启动文件到etc目录下
-```
-cp /opt/orabbix/init.d/orabbix /etc/init.d/orabbix
+AddType image/svg+xml .svg .svgz
 
 
-chkconfig --add orabbix
-chkconfig orabbix on
-systemctl enable orabbix.service
-/etc/init.d/orabbix start
-```
+systemctl restart httpd.service
 
-![](./images/20180712160603.png)
-
-
-
-### orabbix conf
-![](./images/20180712163459.png)
-```
-vim /opt/orabbix/conf/config.props
 ```
 
+![](./images/20180713160242.png)
 
-## 中文乱码
-下载 simkai.ttf
 
-![](./images/20180712171419.png)
 
-```
-vim /usr/share/zabbix/include/defines.inc.php
 
-graphfont 换成 simkai
-```
+
+
