@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tommy.mybatis.dao.PyOrderMapper">
+    <resultMap id="BaseResultMap" type="com.tommy.mybatis.model.PyOrder">
+        <id column="ORDER_NO" jdbcType="DECIMAL" property="orderNo"/>
+        <result column="PAGE_ID" jdbcType="DECIMAL" property="pageId"/>
+        <result column="PAGE_NAME" jdbcType="OTHER" property="pageName"/>
+        <result column="MERCHANT_ID" jdbcType="DECIMAL" property="merchantId"/>
+        <result column="MERCHANT_NAME" jdbcType="OTHER" property="merchantName"/>
+        <result column="PAYMENT_ORDER_NO" jdbcType="VARCHAR" property="paymentOrderNo"/>
+        <result column="RECHARGE_AMOUNT" jdbcType="DECIMAL" property="rechargeAmount"/>
+        <result column="PAYMENT_DATE" jdbcType="TIMESTAMP" property="paymentDate"/>
+        <result column="PAYMENT_NOTIFY_DATE" jdbcType="TIMESTAMP" property="paymentNotifyDate"/>
+        <result column="STATUS" jdbcType="CHAR" property="status"/>
+        <result column="LOCK_USER_ID" jdbcType="DECIMAL" property="lockUserId"/>
+        <result column="LOCK_USER_NAME" jdbcType="OTHER" property="lockUserName"/>
+        <result column="LOCK_TIME" jdbcType="TIMESTAMP" property="lockTime"/>
+        <result column="CLIENT_ACCOUNT" jdbcType="VARCHAR" property="clientAccount"/>
+        <result column="CLIENT_TERMINAL" jdbcType="CHAR" property="clientTerminal"/>
+        <result column="CLIENT_IP" jdbcType="VARCHAR" property="clientIp"/>
+        <result column="REMARK" jdbcType="OTHER" property="remark"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="UPDATE_USER_ID" jdbcType="DECIMAL" property="updateUserId"/>
+        <result column="UPDATE_USER_NAME" jdbcType="VARCHAR" property="updateUserName"/>
+        <result column="SUBMIT_DATE" jdbcType="TIMESTAMP" property="submitDate"/>
+        <result column="RESPONSE_DATA" jdbcType="OTHER" property="responseData"/>
+        <result column="RESPONSE_CODE" jdbcType="OTHER" property="responseCode"/>
+        <result column="RESPONSE_DESC" jdbcType="OTHER" property="responseDesc"/>
+        <result column="RESPONSE_QRCODE" jdbcType="OTHER" property="responseQrcode"/>
+        <result column="PAYMENT_PLATFORM_ID" jdbcType="DECIMAL" property="paymentPlatformId"/>
+        <result column="PAYMENT_PLATFORM_NAME" jdbcType="OTHER" property="paymentPlatformName"/>
+        <result column="PAYMENT_METHOD_ID" jdbcType="DECIMAL" property="paymentMethodId"/>
+        <result column="PAYMENT_METHOD_NAME" jdbcType="OTHER" property="paymentMethodName"/>
+        <result column="ROBOT_PROCESS_STATUS" jdbcType="CHAR" property="robotProcessStatus"/>
+        <result column="DEPOSIT_OFFER" jdbcType="DECIMAL" property="depositOffer"/>
+        <result column="RED_ENVELOPES_OFFER" jdbcType="DECIMAL" property="redEnvelopesOffer"/>
+        <result column="TOTAL_AMOUNT" jdbcType="DECIMAL" property="totalAmount"/>
+        <result column="CALLBACK_AMOUNT" jdbcType="DECIMAL" property="callbackAmount"/>
+        <result column="FEE_OFFER" jdbcType="DECIMAL" property="feeOffer"/>
+        <result column="RECHARGE_CENTER_TYPE_ID" jdbcType="VARCHAR" property="rechargeCenterTypeId"/>
+        <result column="RECHARGE_CENTER_TYPE_NAME" jdbcType="OTHER" property="rechargeCenterTypeName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ORDER_NO, PAGE_ID, PAGE_NAME, MERCHANT_ID, MERCHANT_NAME, PAYMENT_ORDER_NO, RECHARGE_AMOUNT, 
+    PAYMENT_DATE, PAYMENT_NOTIFY_DATE, STATUS, LOCK_USER_ID, LOCK_USER_NAME, LOCK_TIME, 
+    CLIENT_ACCOUNT, CLIENT_TERMINAL, CLIENT_IP, REMARK, CREATE_DATE, UPDATE_DATE, UPDATE_USER_ID, 
+    UPDATE_USER_NAME, SUBMIT_DATE, RESPONSE_DATA, RESPONSE_CODE, RESPONSE_DESC, RESPONSE_QRCODE, 
+    PAYMENT_PLATFORM_ID, PAYMENT_PLATFORM_NAME, PAYMENT_METHOD_ID, PAYMENT_METHOD_NAME, 
+    ROBOT_PROCESS_STATUS, DEPOSIT_OFFER, RED_ENVELOPES_OFFER, TOTAL_AMOUNT, CALLBACK_AMOUNT, 
+    FEE_OFFER, RECHARGE_CENTER_TYPE_ID, RECHARGE_CENTER_TYPE_NAME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from PY_ORDER
+        where ORDER_NO = #{orderNo,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from PY_ORDER
+    where ORDER_NO = #{orderNo,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.tommy.mybatis.model.PyOrder">
+    insert into PY_ORDER (ORDER_NO, PAGE_ID, PAGE_NAME, 
+      MERCHANT_ID, MERCHANT_NAME, PAYMENT_ORDER_NO, 
+      RECHARGE_AMOUNT, PAYMENT_DATE, PAYMENT_NOTIFY_DATE, 
+      STATUS, LOCK_USER_ID, LOCK_USER_NAME, 
+      LOCK_TIME, CLIENT_ACCOUNT, CLIENT_TERMINAL, 
+      CLIENT_IP, REMARK, CREATE_DATE, 
+      UPDATE_DATE, UPDATE_USER_ID, UPDATE_USER_NAME, 
+      SUBMIT_DATE, RESPONSE_DATA, RESPONSE_CODE, 
+      RESPONSE_DESC, RESPONSE_QRCODE, PAYMENT_PLATFORM_ID, 
+      PAYMENT_PLATFORM_NAME, PAYMENT_METHOD_ID, PAYMENT_METHOD_NAME, 
+      ROBOT_PROCESS_STATUS, DEPOSIT_OFFER, RED_ENVELOPES_OFFER, 
+      TOTAL_AMOUNT, CALLBACK_AMOUNT, FEE_OFFER, 
+      RECHARGE_CENTER_TYPE_ID, RECHARGE_CENTER_TYPE_NAME
+      )
+    values (#{orderNo,jdbcType=DECIMAL}, #{pageId,jdbcType=DECIMAL}, #{pageName,jdbcType=OTHER}, 
+      #{merchantId,jdbcType=DECIMAL}, #{merchantName,jdbcType=OTHER}, #{paymentOrderNo,jdbcType=VARCHAR}, 
+      #{rechargeAmount,jdbcType=DECIMAL}, #{paymentDate,jdbcType=TIMESTAMP}, #{paymentNotifyDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=CHAR}, #{lockUserId,jdbcType=DECIMAL}, #{lockUserName,jdbcType=OTHER}, 
+      #{lockTime,jdbcType=TIMESTAMP}, #{clientAccount,jdbcType=VARCHAR}, #{clientTerminal,jdbcType=CHAR}, 
+      #{clientIp,jdbcType=VARCHAR}, #{remark,jdbcType=OTHER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=DECIMAL}, #{updateUserName,jdbcType=VARCHAR}, 
+      #{submitDate,jdbcType=TIMESTAMP}, #{responseData,jdbcType=OTHER}, #{responseCode,jdbcType=OTHER}, 
+      #{responseDesc,jdbcType=OTHER}, #{responseQrcode,jdbcType=OTHER}, #{paymentPlatformId,jdbcType=DECIMAL}, 
+      #{paymentPlatformName,jdbcType=OTHER}, #{paymentMethodId,jdbcType=DECIMAL}, #{paymentMethodName,jdbcType=OTHER}, 
+      #{robotProcessStatus,jdbcType=CHAR}, #{depositOffer,jdbcType=DECIMAL}, #{redEnvelopesOffer,jdbcType=DECIMAL}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{callbackAmount,jdbcType=DECIMAL}, #{feeOffer,jdbcType=DECIMAL}, 
+      #{rechargeCenterTypeId,jdbcType=VARCHAR}, #{rechargeCenterTypeName,jdbcType=OTHER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.tommy.mybatis.model.PyOrder">
+        insert into PY_ORDER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                ORDER_NO,
+            </if>
+            <if test="pageId != null">
+                PAGE_ID,
+            </if>
+            <if test="pageName != null">
+                PAGE_NAME,
+            </if>
+            <if test="merchantId != null">
+                MERCHANT_ID,
+            </if>
+            <if test="merchantName != null">
+                MERCHANT_NAME,
+            </if>
+            <if test="paymentOrderNo != null">
+                PAYMENT_ORDER_NO,
+            </if>
+            <if test="rechargeAmount != null">
+                RECHARGE_AMOUNT,
+            </if>
+            <if test="paymentDate != null">
+                PAYMENT_DATE,
+            </if>
+            <if test="paymentNotifyDate != null">
+                PAYMENT_NOTIFY_DATE,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="lockUserId != null">
+                LOCK_USER_ID,
+            </if>
+            <if test="lockUserName != null">
+                LOCK_USER_NAME,
+            </if>
+            <if test="lockTime != null">
+                LOCK_TIME,
+            </if>
+            <if test="clientAccount != null">
+                CLIENT_ACCOUNT,
+            </if>
+            <if test="clientTerminal != null">
+                CLIENT_TERMINAL,
+            </if>
+            <if test="clientIp != null">
+                CLIENT_IP,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE,
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE,
+            </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID,
+            </if>
+            <if test="updateUserName != null">
+                UPDATE_USER_NAME,
+            </if>
+            <if test="submitDate != null">
+                SUBMIT_DATE,
+            </if>
+            <if test="responseData != null">
+                RESPONSE_DATA,
+            </if>
+            <if test="responseCode != null">
+                RESPONSE_CODE,
+            </if>
+            <if test="responseDesc != null">
+                RESPONSE_DESC,
+            </if>
+            <if test="responseQrcode != null">
+                RESPONSE_QRCODE,
+            </if>
+            <if test="paymentPlatformId != null">
+                PAYMENT_PLATFORM_ID,
+            </if>
+            <if test="paymentPlatformName != null">
+                PAYMENT_PLATFORM_NAME,
+            </if>
+            <if test="paymentMethodId != null">
+                PAYMENT_METHOD_ID,
+            </if>
+            <if test="paymentMethodName != null">
+                PAYMENT_METHOD_NAME,
+            </if>
+            <if test="robotProcessStatus != null">
+                ROBOT_PROCESS_STATUS,
+            </if>
+            <if test="depositOffer != null">
+                DEPOSIT_OFFER,
+            </if>
+            <if test="redEnvelopesOffer != null">
+                RED_ENVELOPES_OFFER,
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT,
+            </if>
+            <if test="callbackAmount != null">
+                CALLBACK_AMOUNT,
+            </if>
+            <if test="feeOffer != null">
+                FEE_OFFER,
+            </if>
+            <if test="rechargeCenterTypeId != null">
+                RECHARGE_CENTER_TYPE_ID,
+            </if>
+            <if test="rechargeCenterTypeName != null">
+                RECHARGE_CENTER_TYPE_NAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=DECIMAL},
+            </if>
+            <if test="pageId != null">
+                #{pageId,jdbcType=DECIMAL},
+            </if>
+            <if test="pageName != null">
+                #{pageName,jdbcType=OTHER},
+            </if>
+            <if test="merchantId != null">
+                #{merchantId,jdbcType=DECIMAL},
+            </if>
+            <if test="merchantName != null">
+                #{merchantName,jdbcType=OTHER},
+            </if>
+            <if test="paymentOrderNo != null">
+                #{paymentOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rechargeAmount != null">
+                #{rechargeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentDate != null">
+                #{paymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paymentNotifyDate != null">
+                #{paymentNotifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="lockUserId != null">
+                #{lockUserId,jdbcType=DECIMAL},
+            </if>
+            <if test="lockUserName != null">
+                #{lockUserName,jdbcType=OTHER},
+            </if>
+            <if test="lockTime != null">
+                #{lockTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clientAccount != null">
+                #{clientAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="clientTerminal != null">
+                #{clientTerminal,jdbcType=CHAR},
+            </if>
+            <if test="clientIp != null">
+                #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=OTHER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=DECIMAL},
+            </if>
+            <if test="updateUserName != null">
+                #{updateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="submitDate != null">
+                #{submitDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="responseData != null">
+                #{responseData,jdbcType=OTHER},
+            </if>
+            <if test="responseCode != null">
+                #{responseCode,jdbcType=OTHER},
+            </if>
+            <if test="responseDesc != null">
+                #{responseDesc,jdbcType=OTHER},
+            </if>
+            <if test="responseQrcode != null">
+                #{responseQrcode,jdbcType=OTHER},
+            </if>
+            <if test="paymentPlatformId != null">
+                #{paymentPlatformId,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentPlatformName != null">
+                #{paymentPlatformName,jdbcType=OTHER},
+            </if>
+            <if test="paymentMethodId != null">
+                #{paymentMethodId,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentMethodName != null">
+                #{paymentMethodName,jdbcType=OTHER},
+            </if>
+            <if test="robotProcessStatus != null">
+                #{robotProcessStatus,jdbcType=CHAR},
+            </if>
+            <if test="depositOffer != null">
+                #{depositOffer,jdbcType=DECIMAL},
+            </if>
+            <if test="redEnvelopesOffer != null">
+                #{redEnvelopesOffer,jdbcType=DECIMAL},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="callbackAmount != null">
+                #{callbackAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="feeOffer != null">
+                #{feeOffer,jdbcType=DECIMAL},
+            </if>
+            <if test="rechargeCenterTypeId != null">
+                #{rechargeCenterTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="rechargeCenterTypeName != null">
+                #{rechargeCenterTypeName,jdbcType=OTHER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tommy.mybatis.model.PyOrder">
+        update PY_ORDER
+        <set>
+            <if test="pageId != null">
+                PAGE_ID = #{pageId,jdbcType=DECIMAL},
+            </if>
+            <if test="pageName != null">
+                PAGE_NAME = #{pageName,jdbcType=OTHER},
+            </if>
+            <if test="merchantId != null">
+                MERCHANT_ID = #{merchantId,jdbcType=DECIMAL},
+            </if>
+            <if test="merchantName != null">
+                MERCHANT_NAME = #{merchantName,jdbcType=OTHER},
+            </if>
+            <if test="paymentOrderNo != null">
+                PAYMENT_ORDER_NO = #{paymentOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rechargeAmount != null">
+                RECHARGE_AMOUNT = #{rechargeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentDate != null">
+                PAYMENT_DATE = #{paymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paymentNotifyDate != null">
+                PAYMENT_NOTIFY_DATE = #{paymentNotifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=CHAR},
+            </if>
+            <if test="lockUserId != null">
+                LOCK_USER_ID = #{lockUserId,jdbcType=DECIMAL},
+            </if>
+            <if test="lockUserName != null">
+                LOCK_USER_NAME = #{lockUserName,jdbcType=OTHER},
+            </if>
+            <if test="lockTime != null">
+                LOCK_TIME = #{lockTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clientAccount != null">
+                CLIENT_ACCOUNT = #{clientAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="clientTerminal != null">
+                CLIENT_TERMINAL = #{clientTerminal,jdbcType=CHAR},
+            </if>
+            <if test="clientIp != null">
+                CLIENT_IP = #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=OTHER},
+            </if>
+            <if test="createDate != null">
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+            </if>
+            <if test="updateUserName != null">
+                UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="submitDate != null">
+                SUBMIT_DATE = #{submitDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="responseData != null">
+                RESPONSE_DATA = #{responseData,jdbcType=OTHER},
+            </if>
+            <if test="responseCode != null">
+                RESPONSE_CODE = #{responseCode,jdbcType=OTHER},
+            </if>
+            <if test="responseDesc != null">
+                RESPONSE_DESC = #{responseDesc,jdbcType=OTHER},
+            </if>
+            <if test="responseQrcode != null">
+                RESPONSE_QRCODE = #{responseQrcode,jdbcType=OTHER},
+            </if>
+            <if test="paymentPlatformId != null">
+                PAYMENT_PLATFORM_ID = #{paymentPlatformId,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentPlatformName != null">
+                PAYMENT_PLATFORM_NAME = #{paymentPlatformName,jdbcType=OTHER},
+            </if>
+            <if test="paymentMethodId != null">
+                PAYMENT_METHOD_ID = #{paymentMethodId,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentMethodName != null">
+                PAYMENT_METHOD_NAME = #{paymentMethodName,jdbcType=OTHER},
+            </if>
+            <if test="robotProcessStatus != null">
+                ROBOT_PROCESS_STATUS = #{robotProcessStatus,jdbcType=CHAR},
+            </if>
+            <if test="depositOffer != null">
+                DEPOSIT_OFFER = #{depositOffer,jdbcType=DECIMAL},
+            </if>
+            <if test="redEnvelopesOffer != null">
+                RED_ENVELOPES_OFFER = #{redEnvelopesOffer,jdbcType=DECIMAL},
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="callbackAmount != null">
+                CALLBACK_AMOUNT = #{callbackAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="feeOffer != null">
+                FEE_OFFER = #{feeOffer,jdbcType=DECIMAL},
+            </if>
+            <if test="rechargeCenterTypeId != null">
+                RECHARGE_CENTER_TYPE_ID = #{rechargeCenterTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="rechargeCenterTypeName != null">
+                RECHARGE_CENTER_TYPE_NAME = #{rechargeCenterTypeName,jdbcType=OTHER},
+            </if>
+        </set>
+        where ORDER_NO = #{orderNo,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.tommy.mybatis.model.PyOrder">
+    update PY_ORDER
+    set PAGE_ID = #{pageId,jdbcType=DECIMAL},
+      PAGE_NAME = #{pageName,jdbcType=OTHER},
+      MERCHANT_ID = #{merchantId,jdbcType=DECIMAL},
+      MERCHANT_NAME = #{merchantName,jdbcType=OTHER},
+      PAYMENT_ORDER_NO = #{paymentOrderNo,jdbcType=VARCHAR},
+      RECHARGE_AMOUNT = #{rechargeAmount,jdbcType=DECIMAL},
+      PAYMENT_DATE = #{paymentDate,jdbcType=TIMESTAMP},
+      PAYMENT_NOTIFY_DATE = #{paymentNotifyDate,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=CHAR},
+      LOCK_USER_ID = #{lockUserId,jdbcType=DECIMAL},
+      LOCK_USER_NAME = #{lockUserName,jdbcType=OTHER},
+      LOCK_TIME = #{lockTime,jdbcType=TIMESTAMP},
+      CLIENT_ACCOUNT = #{clientAccount,jdbcType=VARCHAR},
+      CLIENT_TERMINAL = #{clientTerminal,jdbcType=CHAR},
+      CLIENT_IP = #{clientIp,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=DECIMAL},
+      UPDATE_USER_NAME = #{updateUserName,jdbcType=VARCHAR},
+      SUBMIT_DATE = #{submitDate,jdbcType=TIMESTAMP},
+      RESPONSE_DATA = #{responseData,jdbcType=OTHER},
+      RESPONSE_CODE = #{responseCode,jdbcType=OTHER},
+      RESPONSE_DESC = #{responseDesc,jdbcType=OTHER},
+      RESPONSE_QRCODE = #{responseQrcode,jdbcType=OTHER},
+      PAYMENT_PLATFORM_ID = #{paymentPlatformId,jdbcType=DECIMAL},
+      PAYMENT_PLATFORM_NAME = #{paymentPlatformName,jdbcType=OTHER},
+      PAYMENT_METHOD_ID = #{paymentMethodId,jdbcType=DECIMAL},
+      PAYMENT_METHOD_NAME = #{paymentMethodName,jdbcType=OTHER},
+      ROBOT_PROCESS_STATUS = #{robotProcessStatus,jdbcType=CHAR},
+      DEPOSIT_OFFER = #{depositOffer,jdbcType=DECIMAL},
+      RED_ENVELOPES_OFFER = #{redEnvelopesOffer,jdbcType=DECIMAL},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      CALLBACK_AMOUNT = #{callbackAmount,jdbcType=DECIMAL},
+      FEE_OFFER = #{feeOffer,jdbcType=DECIMAL},
+      RECHARGE_CENTER_TYPE_ID = #{rechargeCenterTypeId,jdbcType=VARCHAR},
+      RECHARGE_CENTER_TYPE_NAME = #{rechargeCenterTypeName,jdbcType=OTHER}
+    where ORDER_NO = #{orderNo,jdbcType=DECIMAL}
+  </update>
+
+</mapper>

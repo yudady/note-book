@@ -1,2 +1,36 @@
 server:
-  port: 8080
+  port: 80
+
+
+
+
+mybatis:
+  type-aliases-package: com.tommy.mybatis.model
+  type-handlers-package: classpath*:com/tommy/mybatis/mapping/*.xml
+  mapper-locations: classpath*:com/tommy/**/*.xml
+
+
+logging :
+  level:
+    root: info
+    org.springframework: info
+    com.tommy: debug
+spring:
+  jmx:
+    enabled: false
+  dbcp2:
+    pool-prepared-statements:
+
+datasource:
+  mypaycenter:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url : jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01
+    username: mypaycenter
+    password: myPay4Zv
+  rd:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url : jdbc:oracle:thin:@35.189.177.41:1521:myPay
+    username: mypaycenter
+    password: u3gfu206kf
+
+
