@@ -72,11 +72,14 @@ systemctl status zabbix-agent.service
 
 ipconfig
 
-10.140.0.254
+10.140.0.159
 
-10.140.1.151
+10.140.1.254
 
-10.140.15.215
+10.140.15.202
+
+
+10.140.2.30
 
 Server=zabbix.mypay1.com,10.140.0.23
 
@@ -92,7 +95,7 @@ net start Tomcat8
 
 
 
-
+http://1007.xc7001.com/cooejw/admin/index.jsp
 
 
 
@@ -121,14 +124,14 @@ http://th33.99399ht.com/admin/index.jsp
 
 ```
 ./su.sh
-cp /etc/zabbix/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf.20180801
+cp /etc/zabbix/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf.20180810
 sed -i 's/Server=zabbix.mypay1.com/Server=zabbix.mypay1.com,10.140.0.23/g' /etc/zabbix/zabbix_agentd.conf
 cat /etc/zabbix/zabbix_agentd.conf | grep mypay
 
 systemctl restart zabbix-agent.service
 systemctl status zabbix-agent.service
 
-cp /etc/systemd/system/tomcat.service /etc/systemd/system/tomcat.service.20180801
+cp /etc/systemd/system/tomcat.service /etc/systemd/system/tomcat.service.20180810
 sed -i "s/35.229.223.31/10.140.0.242/g" /etc/systemd/system/tomcat.service
 cat /etc/systemd/system/tomcat.service | grep 10.140.0.242
 
