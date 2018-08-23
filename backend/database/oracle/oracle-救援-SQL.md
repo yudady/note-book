@@ -20,22 +20,56 @@ order by login_time desc;
 ```
 
 
+
+
+
+
+
+
+
 ## oracle flashback（资料库闪回）
 ```
 
 -- 先找出嘚删除的资料
-SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH:MI:SS')
+SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH24:MI:SS')
 
 -- 把资料放到暂存档（TABLE 需要存在）
 INSERT INTO PY_ORDER_BACK 
-SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH:MI:SS')
+SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH24:MI:SS')
 
 -- 把资料放到暂存档
 CREATE TABLE new_table
 AS
-SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH:MI:SS')
+SELECT * FROM PY_SYSTEM_CONFIG AS OF TIMESTAMP TO_TIMESTAMP('2018-03-31 09:20:00', 'YYYY-MM-DD HH24:MI:SS')
+
+
 
 ```
+
+1. 进行查询闪回如： 
+Select * From 表名 As Of Timestamp to_Timestamp('2009-7-24  18:07:30','yyyy-mm-dd hh24:mi:ss') 
+Where id='CQn2Q9xbvy' 
+      
+2. 闪回的数据重新插入到机表中，如： 
+Insert Into 表名 
+(Select * From 表名 As Of Timestamp to_timestamp('2009-07-24 16:08:30','YYYY-MM-DD HH24:MI:SS') 
+
+3. 恢复被删除的基表 
+Flashback Table 表名 To Before Drop; 
+
+4. 数据库闪回 
+Flashback Database To Scn sid; --sid:指定的系统改变号 
+Flashback Database To Timestamp to_timestamp('2009-07-24 16:08:30','YYYY-MM-DD HH24:MI:SS') 
+      
+      然后在通过插入语句将原始的数据插入到表中，问题总算是解决了
+
+
+
+
+
+
+
+
 
 ## oracle db user drop and create（删除用户，给全部权限）
 ```
