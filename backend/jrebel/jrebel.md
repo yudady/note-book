@@ -6,23 +6,28 @@
 ![](./images/20180704100838.png)
 
 ## rebel.xml(Intellij)
+
 ```
+
 <?xml version="1.0" encoding="UTF-8"?>
-<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.zeroturnaround.com"
+             xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
 
-	<classpath>
-		<dir name="D:/zonvan/coding/myPay/out/artifacts/myPay/WEB-INF/classes">
-		</dir>
-	</classpath>
+    <classpath>
+        <dir name="D:/zonvan/coding/myCenter/out/artifacts/myCenter/WEB-INF/classes">
+        </dir>
+    </classpath>
 
-	<web>
-		<link target="/">
-			<dir name="D:/zonvan/coding/myPay/out/artifacts/myPay">
-			</dir>
-		</link>
-	</web>
+    <web>
+        <link target="/">
+            <dir name="D:/zonvan/coding/myCenter/WebContent">
+            </dir>
+        </link>
+    </web>
 
 </application>
+
 ```
 
 
