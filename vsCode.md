@@ -3,19 +3,31 @@
 ```
 
 {
-    "liveServer.settings.port": 9999,
     "[markdown]": {
-        "editor.wordWrap": "on",
-        "editor.quickSuggestions": true
+        "editor.quickSuggestions": true,
+        "editor.wordWrap": "on"
     },
-    "editor.fontSize": 18,
-    "terminal.integrated.fontSize": 18,
+    "editor.fontSize": 16,
+    "editor.minimap.side": "right",
     "liveServer.settings.donotShowInfoMsg": true,
-    "workbench.sideBar.location": "right",
-    "editor.minimap.side": "right"
+    "liveServer.settings.port": 9999,
+    "python.pythonPath": "D:/install/Anaconda3/pythonw.exe",
+    "terminal.integrated.fontSize": 10,
+    "workbench.sideBar.location": "left",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/~.sql": true,
+        "**/.class": true,
+    },
+    "liveServer.settings.donotVerifyTags": true,
+    "window.zoomLevel": 1,
+    "files.autoSave": "afterDelay",
+    "editor.fontFamily": "monospace,Consolas, 'Courier New'"
 }
-
-
 
 
 
