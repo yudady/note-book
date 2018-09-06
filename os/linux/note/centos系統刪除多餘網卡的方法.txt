@@ -1,0 +1,3 @@
+vi /etc/udev/rules.d/70-persistent-net.rules
+
+把eth 3 4的 mac複製到eth0

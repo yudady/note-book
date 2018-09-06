@@ -1,0 +1,31 @@
+-server -Xms8192m -Xmx8192m -Xmn7168m -XX:+UseParallelGC -XX:ParallelGCThreads=4 -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps
+								
+-Xms8192m -Xmx8192m -Xmn7680m -XX:+UseParallelGC -XX:ParallelGCThreads=4 -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps
+
+
+				
+-XX:NewRatio=3 means that the ratio between the old and young generation is 1:3
+				
+-Xms	初始堆大小	物理內存的1/64(<1GB)	
+默認(MinHeapFreeRatio參數可以調整)空餘堆內存小於40%時，JVM就會增大堆直到-Xmx的最大限制.
+-Xmx	最大堆大小	物理內存的1/4(<1GB)	
+默認(MaxHeapFreeRatio參數可以調整)空餘堆內存大於70%時，JVM會減少堆直到 -Xms的最小限制 
+-Xmn年輕代大小(1.4or lator)
+
+整個堆大小=年輕代大小 + 年老代大小 + 持久代大小.
+
+增大年輕代後,將會減小年老代大小.此值對系統性能影響較大,Sun官方推薦配置為整個堆的3/8
+-XX:NewSize	設置年輕代大小(for 1.3/1.4)		
+-XX:MaxNewSize	年輕代最大值(for 1.3/1.4)		
+-XX:PermSize	設置持久代(perm gen)初始值	物理內存的1/64	
+-XX:MaxPermSize	設置持久代最大值	物理內存的1/4
+
+-XX:NewRatio=4表示年輕代與年老代所占比值為1:4,年輕代占整個堆棧的1/5
+原文網址：https://read01.com/M2DdPJ.html
+
+
+
+
+
+
+

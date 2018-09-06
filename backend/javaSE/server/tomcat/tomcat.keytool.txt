@@ -1,0 +1,12 @@
+
+
+keytool -genkeypair  -keystore e:/tmp/tomcat.keystore -dname "CN=tomcat, OU=tomcat, O=tomcat, L=tomcat, ST=tomcat, C=US" -keypass tomcat -storepass tomcat -keyalg RSA -keysize 2048 -alias default -ext SAN=DNS:localhost,IP:127.0.0.1 -validity 9999
+
+
+
+
+keytool -genkeypair  -keystore e:/tmp/tomcat.keystore -dname "CN=tomcat, OU=tomcat, O=tomcat, L=tomcat, ST=tomcat, C=TW" -keypass tomcat -storepass tomcat -keyalg RSA -keysize 2048 -alias default -ext SAN=DNS:localhost,IP:10.1.1.252,IP:10.1.2.42 -validity 9999
+
+
+
+

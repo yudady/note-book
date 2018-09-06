@@ -1,0 +1,19 @@
+lsnrctl stop
+lsnrctl start
+
+sqlplus /nolog
+
+conn sys/tommy as sysdba
+
+
+
+startup
+
+tnsping VMCentOS.T1TRUS
+
+
+
+
+
+shutdown IMMEDIATE 
+exit

@@ -1,0 +1,73 @@
+mysql： 
+    string driver="com.mysql.jdbc.driver";    //驅動程序    
+    string url="jdbc:mysql://localhost:3306/db_name";     //連接的url,db_name為數據庫名        
+    string username="username";    //用戶名    
+    string password="password";    //密碼    
+    class.forname(driver).new instance();    
+    connection con=drivermanager.getconnection(url,username,password);   
+
+microsoft sql server:
+   1)
+   string driver="com.microsoft.jdbc.sqlserver.sqlserverdriver";    //連接sql數據庫的方法    
+   string url="jdbc:microsoft:sqlserver://localhost:1433;databasename=db_name";     //db_name為數據庫名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).new instance();    //加載數據可驅動    
+   connection con=drivermanager.getconnection(url,username,password);    //   
+   2)
+   string driver="com.microsoft.sqlserver.jdbc.sqlserverdriver";    //連接sql數據庫的方法    
+   string url="jdbc:sqlserver://localhost:1433;databasename=db_name";     //db_name為數據庫名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).new instance();    //加載數據可驅動    
+   connection con=drivermanager.getconnection(url,username,password);  
+    
+sysbase: 
+   string driver="com.sybase.jdbc.sybdriver";    //驅動程序    
+   string url="jdbc:sysbase://localhost:5007/db_name";     //db_name為數據可名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).newinstance();        
+   connection con=drivermanager.getconnection(url,username,password);   
+
+oracle(用thin模式): 
+   string driver="oracle.jdbc.driver.oracledriver";    //連接數據庫的方法    
+   string url="jdbc:oracle:thin:@loaclhost:1521:orcl";    //orcl為數據庫的sid    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).newinstance();    //加載數據庫驅動    
+   connection con=drivermanager.getconnection(url,username,password);   
+    
+postgresql: 
+   string driver="org.postgresql.driver";    //連接數據庫的方法    
+   string url="jdbc:postgresql://localhost/db_name";     //db_name為數據可名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).newinstance();        
+   connection con=drivermanager.getconnection(url,username,password);   
+   string driver="org.postgresql.driver";    //連接數據庫的方法
+
+db2: 
+   string driver="com.ibm.db2.jdbc.app.db2.driver";    //連接具有db2客戶端的provider實例    
+   //string driver="com.ibm.db2.jdbc.net.db2.driver";     //連接不具有db2客戶端的provider實例    
+   string url="jdbc:db2://localhost:50000/db_name";     //db_name為數據可名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).newinstance();        
+   connection con=drivermanager.getconnection(url,username,password);   
+
+informix: 
+   string driver="com.informix.jdbc.ifxdriver";        
+   string url="jdbc:informix-sqli://localhost:1533/db_name:informixser=myserver";     //db_name為數據可名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).newinstance();        
+   connection con=drivermanager.getconnection(url,username,password);   
+
+jdbc-odbc: 
+   string driver="sun.jdbc.odbc.jdbcodbcdriver";    
+   string url="jdbc:odbc:dbsource";    //dbsource為數據源名    
+   string username="username";    //用戶名    
+   string password="password";    //密碼    
+   class.forname(driver).newinstance();        
+   connection con=drivermanager.getconnection(url,username,password);   

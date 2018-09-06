@@ -1,0 +1,63 @@
+
+sqlplus trusman/Trusman0935@TWM.T1TRUS
+
+sqlplus trusman/Trusman0935@TWM.T3TRUS
+
+
+exp trusman/Trusman0935@TWM.T3TRUS file=E:/T3TRUS.dmp log=e:/T3TRUS_exp.log owner=(trusman) buffer=6550000 compress=y
+
+sqlplus sys as sysdba
+tommy
+
+sqlplus sys/oracle@VMCentOS.T1TRUS as sysdba
+
+
+--刪除用戶--
+drop user trusman cascade;
+--刪除表空間--
+drop tablespace trusman including contents;
+
+
+--創建用戶並授權--
+create user trusman identified by Trusman0935 ;
+grant resource,connect to trusman;
+grant select any dictionary to trusman;
+grant select any sequence to trusman;
+grant create any table,alter any table,drop any table to trusman;
+grant select any table,insert any table,update any table,delete any table to trusman;
+grant create any trigger,alter any trigger,drop any trigger to trusman;
+grant create any procedure,alter any procedure,drop any procedure,execute any procedure to trusman;
+grant create any view,drop any view to trusman;
+grant create any synonym to trusman;
+grant create any snapshot to trusman;
+
+--刪除用戶--
+drop user APTRUS cascade;
+--刪除表空間--
+drop tablespace APTRUS including contents;
+create user APTRUS identified by TRUSMAN0935;
+grant resource,connect to APTRUS;
+grant select any dictionary to APTRUS;
+grant select any sequence to APTRUS;
+grant create any table,alter any table,drop any table to APTRUS;
+grant select any table,insert any table,update any table,delete any table to APTRUS;
+grant create any trigger,alter any trigger,drop any trigger to APTRUS;
+grant create any procedure,alter any procedure,drop any procedure,execute any procedure to APTRUS;
+grant create any view,drop any view to APTRUS;
+grant create any synonym to APTRUS;
+grant create any snapshot to APTRUS;
+
+commit;
+exit;
+
+
+cmd
+
+
+imp trusman/Trusman0935@TOMMY.T1TRUS fromuser=(trusman) touser=(trusman) buffer=655000 ignore=y file=E:/TWM.dmp log=e:/TWM.log
+imp trusman/Trusman0935@T1TRUS fromuser=(trusman) touser=(trusman) buffer=655000 ignore=y file=Z:/db/T1TURS.dmp log=c:/T1TURS.imp.log
+
+
+imp trusman/Trusman0935@VMCentOS.T1TRUS fromuser=(trusman) touser=(trusman) buffer=655000 ignore=y file=E:/twm/db/T1TURS.dmp log=E:/twm/db/T1TURS.imp.log
+
+

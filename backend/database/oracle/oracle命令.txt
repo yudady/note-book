@@ -1,0 +1,48 @@
+查詢 Oracle 版本
+SELECT * FROM v$version
+或
+SELECT * FROM product_component_version
+
+不對用戶做表空間限額控制:
+grant unlimited tablespace to scott;
+
+將oracle中scott用戶數據導出
+exp scott/tommy@tommy file=d:\daochu.dmp owner=(scott)
+
+
+數據庫遷移、重組、備份、恢復可以有如下幾種處理方式：
+
+1.導出、導入用戶
+ 1.1導出用戶
+  exp system/oracle@orcl file=c:\ies20101009.dmp log=c:\ies20101009_exp.log owner=(ies) buffer=655000 compress=y
+ 1.2導入用戶
+  connect system/oracle@orcl;
+  --刪除用戶--
+  drop user ies cascade;
+  --刪除表空間--
+  drop tablespace iests including contents;
+  --創建表空間--
+  create tablespace iests datafile 'D:\oracle\oradata\orcl\iests.dbf' size 200m reuse autoextend on next 50m;
+  --創建用戶並授權--
+  create user ies identified by oracle default tablespace iests;
+  grant resource,connect to ies;
+  grant select any dictionary to ies;
+  grant select any sequence to ies;
+  grant create any table,alter any table,drop any table to ies;
+  grant select any table,insert any table,update any table,delete any table to ies;
+  grant create any trigger,alter any trigger,drop any trigger to ies;
+  grant create any procedure,alter any procedure,drop any procedure,execute any procedure to ies;
+  grant create any view,drop any view to ies;
+  grant create any synonym to ies;
+  grant create any snapshot to ies;
+  --導入dmp--
+  imp system/oracle@orcl fromuser=(ies) touser=(ies) buffer=655000 ignore=y file=c:\ies20101008.dmp log=c:\ies20101008_imp.log
+ 1.3總結
+           導出、導入用戶的操作是備份、恢復的主要方法，該方法非常穩定，一般不會產生異常或報錯的信息。
+           需要注意的是在oracle不同版本之間備份和恢復時，導入、導出需要是同一個版本的數據庫，即需要將10g的數據庫備份到9i時，需要用9i的客戶端連接10g的數據庫進行導出，然後在用9i進行導入。
+
+　　　　導入、導出常遇到的問題有：1.字符集不匹配，一般使用NLS_LANG=SIMPLIFIED CHINESE_CHINA.ZHS16GBK，2.客戶端版本不對，10.0.2.0.1不能導入到10.0.2.0.3的數據庫中。
+
+　　　　在數據庫恢復時（導入），需要停止web服務，是數據庫處於不被連接的狀態，否則用戶刪除時報錯，不能被刪除。
+
+如果不刪除用戶，只刪除表空間，將導致用戶下的object不能被刪除（object包括function,procedure,synonym,package,Javasource,javaclass等）,同樣object不能被導入。

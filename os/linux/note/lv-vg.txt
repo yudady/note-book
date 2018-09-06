@@ -1,0 +1,15 @@
+
+pvs
+
+fd -l
+--¥[µwºÐ
+pvcreate /dev/sdd
+vgs
+vgextend VG /dev/sdd
+vgs
+vgdisplay
+lvextend -L +10G /dev/LV......
+lvdisplay
+lvs
+df -h
+resize2fs /dev/LV/VG

@@ -1,0 +1,13 @@
+一些CentOS等Linux系統啟動後可能會出現讀進度條等待進入系統的過程，
+對於學習Linux啟動過程非常不利，我們可以將它恢復到顯示詳細啟動過程模式。
+
+使用root用戶修改 /boot/grub/grub.conf 文件。
+
+[root@Slyar ~]# vim /boot/grub/grub.conf
+
+找到下面的部分，將"rhgb"去掉，保存即可。
+其中"rhgb"表示"redhat graphics boot"，就是圖形進度條模式。
+而"quiet"表示在啟動過程中只顯示重要啟動信息，類似硬件自檢之類的消息不會顯示，可以有選擇地選用。
+
+kernel /vmlinuz-2.6.32-71.el6.i686 ro root=UUID=697cb0d9-19f6-414a-90a1-5ceb2f40b03d rd_NO_LUKS rd_NO_LVM rd_NO_MD rd_NO_DM LANG=zh_CN.UTF-8 KEYBOARDTYPE=pc KEYTABLE=us crashkernel=auto rhgb quiet
+

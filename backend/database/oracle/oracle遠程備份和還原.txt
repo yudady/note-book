@@ -1,0 +1,71 @@
+用exp/imp遠程操作數據庫
+關鍵字: exp/imp遠程操作 
+在http://icyheart.javaeye.com/blog/424760中詳細分析了exp/imp在本地數據庫上的操作，其實exp/imp除了上述的功能外，還可以對遠程數據庫進行操作，具體方法如下：
+一、修改tnsnames.ora文件(或步驟一可省略，寫法是exp[imp] username/password@ip地址/數據庫實例名 file=路徑.dmp [如是imp,還要加上 full=y ] )
+加入遠程服務器的命名：
+Sql代碼   
+192.168.1.117 =     (DESCRIPTION =       (ADDRESS_LIST =         (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.117)(PORT = 1521))       )       (CONNECT_DATA =         (SERVICE_NAME = orcl)       )     )   
+二、測試遠程服務器是否暢通
+進入到cmd後，執行命令:tnsping 192.168.100.111，如果連接正常應返回下面的界面：
+Sql代碼   
+C:\Documents and Settings\Administrator>tnsping 192.168.1.117     TNS Ping Utility for 32-bit Windows: Version 10.2.0.1.0 - Production on 12-8月 -2009 09:06:53     Copyright (c) 1997, 2005, Oracle.  All rights reserved.     已使用的參數文件:   e:\oracle\product\10.2.0\db_1\network\admin\sqlnet.ora       已使用 TNSNAMES 適配器來解析別名   Attempting to contact (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.117)(PORT = 1521))) (CONNECT_DATA = (SERVICE_NAME =   orcl)))   OK (50 毫秒)   
+三、遠程操作數據庫
+導出：
+Sql代碼   
+exp username/password@192.168.1.117 file=c:\本地存放數據庫備份後的路徑    
+
+ 
+導入：
+Sql代碼   
+imp username/password@192.168.1.117 file=要導入遠程數據庫的文件 full=y   
+
+好了，完成了！這樣就不用再遠程登陸服務器去操作了
+Oracle數據導入導出imp/exp 
+功能：Oracle數據導入導出imp/exp就相當與oracle數據還原與備份。
+ 
+大多情況都可以用Oracle數據導入導出完成數據的備份和還原（不會造成數據的丟失）。
+ Oracle有個好處，雖然你的電腦不是服務器，但是你裝了oracle客戶端，並建立了連接
+ （通過Net Configuration Assistant添加正確的服務命名，其實你可以想成是客戶端與服務器端 修了條路，然後數據就可以被拉過來了）
+ 這樣你可以把數據導出到本地，雖然可能服務器離你很遠。
+ 你同樣可以把dmp文件從本地導入到遠處的數據庫服務器中。
+ 利用這個功能你可以構建倆個相同的數據庫，一個用來測試，一個用來正式使用。
+ 
+執行環境：可以在SQLPLUS.EXE或者DOS（命令行）中執行，
+ DOS中可以執行時由於 在oracle 8i 中  安裝目錄\$ora10g\BIN被設置為全局路徑，
+ 該目錄下有EXP.EXE與IMP.EXE文件被用來執行導入導出。
+ oracle用java編寫，我想SQLPLUS.EXE、EXP.EXE、IMP.EXE這倆個文件是被包裝後的類文件。
+ SQLPLUS.EXE調用EXP.EXE、IMP.EXE他們所包裹的類，完成導入導出功能。
+下面介紹的是導入導出的實例，向導入導出看實例基本上就可以完成，因為導入導出很簡單。
+數據導出：
+ 1 將數據庫TEST完全導出,用戶名system 密碼manager 導出到D:\daochu.dmp中
+   exp system/manager@TEST file=d:\daochu.dmp full=y
+ 2 將數據庫中system用戶與sys用戶的表導出
+   exp system/manager@TEST file=d:\daochu.dmp owner=(system,sys)
+ 3 將數據庫中的表table1 、table2導出
+   exp system/manager@TEST file=d:\daochu.dmp tables=(table1,table2) 
+ 4 將數據庫中的表table1中的字段filed1以"00"打頭的數據導出
+   exp system/manager@TEST file=d:\daochu.dmp tables=(table1) query=\" where filed1 like  '00%'\"
+  
+     上面是常用的導出，對於壓縮我不太在意，用winzip把dmp文件可以很好的壓縮。
+                     不過在上面命令後面 加上 compress=y  就可以了
+數據的導入
+ 1 將D:\daochu.dmp 中的數據導入 TEST數據庫中。
+   imp system/manager@TEST  file=d:\daochu.dmp
+   上面可能有點問題，因為有的表已經存在，然後它就報錯，對該表就不進行導入。
+   在後面加上 ignore=y 就可以了。
+ 2 將d:\daochu.dmp中的表table1 導入
+ imp system/manager@TEST  file=d:\daochu.dmp  tables=(table1) 
+ 
+ 基本上上面的導入導出夠用了。不少情況我是將表徹底刪除，然後導入。
+ 
+注意：
+ 你要有足夠的權限，權限不夠它會提示你。
+ 數據庫時可以連上的。可以用tnsping TEST 來獲得數據庫TEST能否連上。
+ 數據導出：
+exp hkb/hkb@boss_14 full=y file=c:\orabackup\hkbfull.dmp log=c:\orabackup\hkbfull.log;
+導出注意事項：導出的是當前用戶的的數據，當前用戶如果有DBA的權限，則導出所有數據！
+同名用戶之間的數據導入：
+imp hkb/hkb@xe  file=c:\orabackup\hkbfull.dmp log=c:\orabackup\hkbimp.log full=y
+不同名之間的數據導入：
+imp system/test@xe fromuser=hkb touser=hkb_new file=c:\orabackup\hkbfull.dmp
+log=c:\orabackup\hkbimp.log;

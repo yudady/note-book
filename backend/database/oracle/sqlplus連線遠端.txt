@@ -1,0 +1,9 @@
+sqlplus scott/tommy@192.168.88.128:1521/orcl
+
+sqlplus scott/tommy@192.168.88.128:1521/orcl.localdomain
+
+sqlplus scott/tommy@//127.0.0.1:1521/orcl.localdomain
+sqlplus scott/tommy@//localhost:1521/orcl.localdomain
+
+
+system/oracle@//192.168.1.179:1521/orc10g連接

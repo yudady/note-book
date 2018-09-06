@@ -1,0 +1,166 @@
+關閉 SELinux ~
+vi /etc/sysconfig/selinux
+
+SELINUX=enforcing 改成--> SELINUX=disabled
+
+關閉NetworkManager，並設定網路
+
+如果覺得NetworkManager不好用，關閉方法：
+
+#service NetworkManager stop
+
+#chkconfig NetworkManager off
+
+網路設定檔
+
+#vim /etc/sysconfig/network-script/ifcfg-eth0
+
+-----內容如下-----
+
+*****略*****
+
+NM_CONTROLLED="no"
+
+ONBOOT="yes"
+
+*****略*****
+
+-------------------- 
+#service network restart
+
+
+
+這是有聲音的視頻， 請打開耳機或者音箱........
+
+使用oracle賬號 登陸圖形界面 進行安裝
+
+運行終端 Terminal
+
+cd /u01/database
+
+./runInstaller
+
+Installation Optiong
+	install database software only
+
+Grid Options
+	Single instance database installation
+
+Product Languages
+	English
+
+Database Edition
+	Enterprise Edition (3.95)
+
+Installation Location
+	Oracle Base: /u01
+	Software Loacation: /u01/oracle
+
+		提示： yes
+
+Create Inventory
+	mkdir /oraInventory
+
+	chown -R oracle:oinstall oraInventory
+
+Operating System Groups
+	Next 
+
+Prerequis ite Checks
+	Ignore All
+
+Summary
+	Finish
+
+Install Product
+	安裝完畢， 提示執行 2個腳本
+
+	/oraInventory/orainstRoot.sh
+	/u01/oracle/root.sh
+		直接按回車， 缺省值就可以
+
+Finish
+	The installation of Oracle Database was successful
+
+====================================
+
+上面只是安裝了軟件， 數據庫沒有創建， 還有配置 監聽器 Listener
+
+netca
+	一直默認下一步 ， 呵呵， 最後 Finish
+
+ps -ef 可以查看Listener是否配置成功
+
+-----------
+dbca
+	一直 Next,	Global Database Name 和 SID 都是輸入 wilson
+
+	選擇 User the Same.....All Accounts
+
+		密碼: 123456
+
+
+	選擇 Sample Schemas
+
+	Memory 內存分配，默認就可以了
+	Character Sets 選擇 Use Unicode(AL32UTF8)
+
+	然後一直 Next ， 到最後 Finish
+
+彈出一個 Confirmation , 點擊 OK 就可以了， 然後自動進行安裝
+
+安裝到目錄 /u01/oradata/wilson
+	   /u01/等等。。。 會發現多了很多文件。
+
+--------------------
+然後可以修改  vi /etc/inittab 讓 centos5.5 linux 啟動的時候 不進入 圖形界面
+		直接進入 字符界面
+
+	id:5:initdefault:	修改成  id:3:initdefault:
+
+	保存退出， 然後重啟系統
+
+--------------------------------
+用 oracle 用戶 遠程登錄， 然後 
+
+$ sqlplus /nolog
+
+SQL> conn / as sysdba
+
+Connected to an idle instance.
+出現錯誤 
+
+SQL> startup
+
+[oracle@localhost ~]$ sqlplus /nolog
+
+SQL*Plus: Release 11.2.0.1.0 Production on Fri Jun 25 15:05:54 2010
+
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+
+SQL> conn / as sysdba
+Connected.
+SQL> create table testUser( id integer,name char(10));
+
+Table created.
+
+SQL> insert into testUser values(0,'Jack');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from testUser;
+
+        ID NAME
+---------- ----------
+         0 Jack
+
+關閉數據庫
+SQL>  shutdown immediate
+
+SQL>  quit
+
+最後謝謝大家觀看， 由於第一次安裝， 如果有什麼好的建議，可以給我留言，88

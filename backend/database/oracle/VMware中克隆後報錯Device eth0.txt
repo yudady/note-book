@@ -1,0 +1,11 @@
+解決CentOS虛擬機在VMware中克隆後報錯Device eth0 does not seem to be present
+1.刪除/etc/sysconfig/network-scripts/ifcfg-eth0中包含 
+
+HWADDR=...... 
+UUID=...... 
+
+的兩行，其他內容不用刪除，記得修改ONBOOT=yes 
+
+2.然後刪除/etc/udev/rules.d/70-persistent-net.rules文件 
+
+3.重啟虛擬機，就會重新識別eth0網卡

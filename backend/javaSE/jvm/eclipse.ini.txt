@@ -1,0 +1,27 @@
+-startup
+plugins/org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.win32.win32.x86_64_1.1.300.v20150602-1417
+-product
+org.springsource.sts.ide
+--launcher.defaultAction
+openFile
+--launcher.XXMaxPermSize
+# 256M
+-vm
+jdk7_64/bin/javaw.exe
+-vmargs
+-Dosgi.requiredJavaVersion=1.7
+# 設置JVM啟動可用內存為2048M。
+-Xms1536m
+# 設置JVM最大可用內存為2048M
+-Xmx3096m
+# 設置年輕代大小為1G
+-Xmn1g
+# 設置持久代大小為
+-XX:PermSize=512m
+# 設置持久代最大值 
+-XX:MaxPermSize=1024m
+-Xverify:none
+-Dorg.eclipse.swt.browser.IEVersion=10001
+-Dfile.encoding=UTF-8

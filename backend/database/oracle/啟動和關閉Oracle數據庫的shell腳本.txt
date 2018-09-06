@@ -1,0 +1,26 @@
+1.啟動Oracle數據庫
+#Use this script if you want to start Oracle services
+#Script should be ran as Oracle user
+cd /tmp
+lsnrctl start
+sqlplus -S /nolog <<ENDSQL
+connect / as sysdba
+startup
+exit
+ENDSQL
+emctl start dbconsole
+isqlplusctl start
+
+
+2.關閉Oracle數據庫
+#Use this script if you want to stop  Oracle services
+#Script should be ran as Oracle user
+cd /tmp
+isqlplusctl stop
+emctl stop dbconsole
+sqlplus -S /nolog <<ENDSQL
+connect / as sysdba
+shutdown immediate
+exit
+ENDSQL
+lsnrctl stop

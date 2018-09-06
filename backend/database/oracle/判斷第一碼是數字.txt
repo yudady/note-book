@@ -1,0 +1,3 @@
+clear;
+--判斷第一碼(tact001.ORG_CD)是數字
+select tact001.ORG_CD from tact001 where regexp_like(SUBSTR(tact001.ORG_CD,1,1) ,'^[[:digit:]]+$');
