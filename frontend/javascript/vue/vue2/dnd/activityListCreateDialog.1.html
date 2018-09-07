@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../../../lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col-md-3 text-right">活动中心模板：</div>
+            <div class="col-md-8 text-align-left">
+                <input type="radio" name="activityTemplate" id="activityTemplateA" value="A" v-model="activityTemplate">
+                <label for="activityTemplateA">模板A</label>
+                <input type="radio" name="activityTemplate" id="activityTemplateB" value="B" v-model="activityTemplate">
+                <label for="activityTemplateA">模板B</label>
+                <input type="radio" name="activityTemplate" id="activityTemplateC" value="C" v-model="activityTemplate">
+                <label for="activityTemplateA">模板C</label>
+                <input type="radio" name="activityTemplate" id="activityTemplateD" value="D" v-model="activityTemplate">
+                <label for="activityTemplateA">模板D</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-right">自动审核：</div>
+            <div class="col-md-3 text-left">
+                <input type="radio" name="autoVerify" id="autoVerifyY" value="Y" v-model="autoVerify">
+                <label for="autoVerifyY">是</label>
+                <input type="radio" name="autoVerify" id="autoVerifyN" value="N" v-model="autoVerify">
+                <label for="autoVerifyN">否</label>
+            </div>
+            <div class="col-md-3 text-right">彩金增加随机数</div>
+            <div class="col-md-3 text-left">
+                <input type="radio" name="isLotteryAddRandom" id="isLotteryAddRandomY" value="Y" v-model="isLotteryAddRandom">
+                <label for="isLotteryAddRandomY">是</label>
+                <input type="radio" name="isLotteryAddRandom" id="isLotteryAddRandomN" value="N" v-model="isLotteryAddRandom">
+                <label for="isLotteryAddRandomN">否</label>
+            </div>
+        </div>
+
+
+        <!-- 会员提交表单.ohActivityData1 -->
+        <div class="row ohActivityData1">
+            <div class="col-md-12 text-center">
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td :rowspan="ohActivityData1Rowspan" class="align-middle text-right" style="vertical-align: middle;">会员提交表单：
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;">显示会员账号</td>
+                        <td style="width: 25%;">
+                            <input type="radio" name="showClientAccount" id="showClientAccountY" value="Y" v-model="showClientAccount">
+                            <label for="showClientAccountY">是</label>
+                            <input type="radio" name="showClientAccount" id="showClientAccountN" value="N" v-model="showClientAccount">
+                            <label for="showClientAccountN">否</label>
+                        </td>
+                        <td style="width: 25%;">
+                            <select class="form-control" v-model="clientAccountType">
+                                <option value="1">英文+數字</option>
+                                <option value="2">數字</option>
+                                <option value="3">文本(不限制)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: center">
+                            <input class="btn btn-primary" type="button" @click="ohActivityData1Add" value="添加表单">
+                        </td>
+                    </tr>
+                    <tr style="background-color: #00C853">
+                        <td>表单名称</td>
+                        <td>数据类型</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" v-show="ohActivityData1Items.length == 0">暂无数据</td>
+                    </tr>
+                    <tr v-for="(item,index) in ohActivityData1Items" :key="item.columnName">
+                        <td>
+                            <span v-show="!item.editNow">{{item.columnName}}</span>
+                            <span v-show="item.editNow">
+                                <input type="text" v-model="item.columnName">
+                            </span>
+                        </td>
+                        <td>
+                            <span v-show="!item.editNow">{{item.value}}</span>
+                            <span v-show="item.editNow">
+                                <input type="text" v-model="item.value">
+                            </span>
+                        </td>
+                        <td>
+                            <input class="btn btn-sm btn-primary" type="button" value="确认" v-show="item.editNow" @click="ohActivityData1ItemsEditOk(index)"><input
+                                class="btn btn-sm btn-primary" type="button" value="编辑" v-show="!item.editNow" @click="ohActivityData1ItemsEdit(index)">&nbsp;/&nbsp;<input
+                                class="btn btn-danger" type="button" value="删除" @click="ohActivityData1ItemsRemove(index)">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 活动快选彩金.ohActivityData2 -->
+        <div class="row text-center ohActivityData2">
+            <div class="col-md-12 text-center">
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td rowspan="6" class="align-middle text-right" style="vertical-align: middle;">活动快选彩金：
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: center">
+                            <input class="btn btn-primary" type="button" @click="" value="添加金额">
+                        </td>
+                    </tr>
+                    <tr style="background-color: #00C853">
+                        <td>名称</td>
+                        <td>活动彩金</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+                        <td>门槛1</td>
+                        <td>100元</td>
+                        <td>编辑/删除</td>
+                    </tr>
+
+                    <tr>
+                        <td>门槛2</td>
+                        <td>500元</td>
+                        <td>编辑/删除</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- 快选流水倍数.ohActivityData3  類型;1-會員提交表單,2-活動快選彩金,3-快選流水倍數,4-快選回覆會員訊息-->
+        <div class="row ohActivityData3">
+            <div class="col-md-12 text-center">
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td rowspan="6" class="align-middle text-right" style="vertical-align: middle;">快选流水倍数：
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: center">
+                            <input class="btn btn-primary" type="button" @click="" value="添加倍数">
+                        </td>
+                    </tr>
+                    <tr style="background-color: #00C853">
+                        <td>名称</td>
+                        <td>流水倍数</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+                        <td>门槛1</td>
+                        <td>1倍</td>
+                        <td>编辑/删除</td>
+                    </tr>
+
+                    <tr>
+                        <td>门槛2</td>
+                        <td>5倍</td>
+                        <td>编辑/删除</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 快选回复会员信息.ohActivityData4 -->
+        <div class="row ohActivityData4">
+            <div class="col-md-12 text-center">
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td rowspan="6" class="align-middle text-right" style="vertical-align: middle;">快选回复会员信息：
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: center">
+                            <input class="btn btn-primary" type="button" @click="" value="添加信息">
+                        </td>
+                    </tr>
+                    <tr style="background-color: #00C853">
+                        <td>名称</td>
+                        <td>信息</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr>
+                        <td>门槛1</td>
+                        <td>恭喜中奖</td>
+                        <td>编辑/删除</td>
+                    </tr>
+
+                    <tr>
+                        <td>门槛2</td>
+                        <td>中奖已派发</td>
+                        <td>编辑/删除</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!-- 流水计算类型： -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td rowspan="4" class="align-middle text-right" style="vertical-align: middle;">流水计算类型：
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                        <td style="width: 25%;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left">○ 彩金</td>
+                    </tr>
+                    <tr>
+                        <td>○ 彩金+本金</td>
+                        <td>本金获取来源：</td>
+                        <td>下拉选择▼</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="../../../lib/vue.v2.5.2.min.js"></script>
+    <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+    <script src="../../../lib/Sortable.1.7.0.min.js"></script>
+    <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+    <script src="../../../lib/vuedraggable.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                activityTemplate: 'C',
+                autoVerify: 'N',
+                isLotteryAddRandom: 'N',
+                showClientAccount: 'N',
+                clientAccountType: '2',
+                ohActivityData1Items: [
+                    { 'editNow': false, 'columnName': '游戏注单号', 'value': '数字' },
+                    { 'editNow': false, 'columnName': '本金', 'value': '数字' },
+                ]
+            },
+            computed: {
+                ohActivityData1Rowspan: function () {
+                    return this.ohActivityData1Items.length + 5;
+                }
+            },
+            methods: {
+                ohActivityData1Add() {
+                    this.ohActivityData1Items.unshift({ 'editNow': false, 'columnName': this.ohActivityData1Items.length, 'value': '' });
+                },
+                ohActivityData1ItemsRemove(index) {
+                    this.ohActivityData1Items.splice(index, 1);
+                },
+                ohActivityData1ItemsEdit(index) {
+                    let item = this.ohActivityData1Items[index];
+                    activityList.vm.ohActivityData1Items[index].editNow = true;
+
+                },
+                ohActivityData1ItemsEditOk(index) {
+                    let item = this.ohActivityData1Items[index];
+                    activityList.vm.ohActivityData1Items[index].editNow = false;
+                },
+
+
+            }
+        });
+    </script>
+</body>
+
+</html>
