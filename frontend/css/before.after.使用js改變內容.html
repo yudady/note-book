@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    button {
+      font-size: 16px;
+    }
+
+    div {
+      margin: 10px;
+      font-size: 20px;
+    }
+
+    div::before {
+      content: attr(data-text) '，';
+    }
+  </style>
+</head>
+
+<body>
+
+  <br>
+  <button id="b1">顯示 ABC</button>
+  <button id="b2">顯示 123</button>
+
+  <br>
+  <br>
+  <div data-text="我是預設文字">我是 div</div>
+
+  <script>
+    window.onload = function () {
+      var b1 = document.getElementById('b1');
+      var b2 = document.getElementById('b2');
+      var d = document.querySelector('div');
+
+
+      b1.addEventListener('click', function () {
+        d.setAttribute('data-text', 'ABC');
+      });
+      b2.addEventListener('click', function () {
+        d.setAttribute('data-text', '123');
+      });
+    }
+
+  </script>
+</body>
+
+</html>
