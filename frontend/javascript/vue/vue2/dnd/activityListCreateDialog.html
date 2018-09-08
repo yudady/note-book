@@ -87,10 +87,11 @@
                                         <span v-show="!item.editNow">{{item.value}}</span>
                                         <input v-show="item.editNow" class="form-control" type="text" v-model="item.value">
                                     </div>
-                                    <div class="col-md-4"> <input class="btn btn-sm btn-warning" type="button" value="确认"
-                                            v-show="item.editNow" @click="ohActivityData1ItemsEditOk(index)"><input class="btn btn-sm btn-primary"
-                                            type="button" value="编辑" v-show="!item.editNow" @click="ohActivityData1ItemsEdit(index)">&nbsp;/&nbsp;<input
-                                            class="btn btn-danger" type="button" value="删除" @click="ohActivityData1ItemsRemove(index)"></div>
+                                    <div class="col-md-4">
+                                        <input class="btn btn-sm btn-warning" type="button" value="确认" v-show="item.editNow" @click="ohActivityData1ItemsEditOk(item)"><input
+                                            class="btn btn-sm btn-primary" type="button" value="编辑" v-show="!item.editNow" @click="ohActivityData1ItemsEdit(item)">&nbsp;/&nbsp;<input
+                                            class="btn btn-danger" type="button" value="删除" @click="ohActivityData1ItemsRemove(index)">
+                                    </div>
                                 </div>
                             </draggable>
                             <!-- draggable.end -->
@@ -158,14 +159,10 @@
 
 
                 },
-                ohActivityData1ItemsEdit(index) {
-                    let item = this.ohActivityData1Items[index];
-                    activityList.vm.ohActivityData1Items[index].editNow = true;
-
+                ohActivityData1ItemsEdit(item) {
+                    item.editNow = true;
                 },
-                ohActivityData1ItemsEditOk(index) {
-
-                    let item = this.ohActivityData1Items[index];
+                ohActivityData1ItemsEditOk(item) {
                     if (item.columnName == '') {
                         this.ohActivityData1ItemsErrorMessage = 'columnName error';
                         return;
@@ -174,9 +171,9 @@
                         this.ohActivityData1ItemsErrorMessage = 'value error';
                         return;
                     }
-
                     this.ohActivityData1ItemsErrorMessage = '';
-                    activityList.vm.ohActivityData1Items[index].editNow = false;
+                    item.editNow = false;
+
 
                 },
 
