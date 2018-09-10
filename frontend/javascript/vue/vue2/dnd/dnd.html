@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <draggable v-model="myArray" @start="drag=true" @end="drag=false">
+            <div style="width:30px;height: 50px; margin-left: 50px" v-for="element in myArray" :key="element.id">{{element.name}}</div>
+        </draggable>
+    </div>
+
+
+
+
+    <script src="../../lib/vue.v2.5.2.min.js"></script>
+    <!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+    <script src="../../lib/Sortable.1.7.0.min.js"></script>
+    <!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+    <script src="../../lib/vuedraggable.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myArray: [
+                    { id: 1, name: "1111111111111111111" },
+                    { id: 2, name: "2222222222222222222" },
+                    { id: 3, name: "3333333333333333333" },
+                    { id: 4, name: "4444444444444444444" },
+                    { id: 5, name: "5555555555555555555" },
+                    { id: 6, name: "6666666666666666666" },
+                    { id: 7, name: "7777777777777777777" },
+                    { id: 8, name: "8888888888888888888" },
+                    { id: 9, name: "9999999999999999999" },
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

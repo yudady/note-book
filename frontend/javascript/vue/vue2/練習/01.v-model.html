@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>00.skeleton</title>
+    <link href="../lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body class="panel">
+
+
+    <div id="app" class="panel-body">
+        <input type="text" v-model="msg"><br>
+        <input type="text" v-model="msg"><br>
+        <input type="text" v-model="msg"><br>
+        <input type="text" v-model="msg"><br>
+        <input type="text" v-model="msg">
+        <br> {{ msg }}
+        <br> {{ arr }}
+        <br> {{ json }}<br>
+
+    </div>
+
+
+    <script src="../lib/vue.v2.5.2.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world',
+                arr: ['apple', 'orange', 'banana'],
+                json: { a: 'apple', b: 'banana' }
+            },
+            computed: {
+            },
+            methods: {
+            }
+        });
+    </script>
+</body>
+
+</html>

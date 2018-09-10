@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="../lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-xs-3 text-right">活动中心模板：</div>
+        <div class="col-xs-8 text-align-left">
+            <input type="radio" name="activityTemplate" id="activityTemplateA" value="A"
+                   v-model="activityTemplate">
+            <label for="activityTemplateA">模板A</label>
+            <input type="radio" name="activityTemplate" id="activityTemplateB" value="B"
+                   v-model="activityTemplate">
+            <label for="activityTemplateA">模板B</label>
+            <input type="radio" name="activityTemplate" id="activityTemplateC" value="C"
+                   v-model="activityTemplate">
+            <label for="activityTemplateA">模板C</label>
+            <input type="radio" name="activityTemplate" id="activityTemplateD" value="D"
+                   v-model="activityTemplate">
+            <label for="activityTemplateA">模板D</label>
+        </div>
+
+        <div class="col-xs-3 text-right">自动审核：</div>
+        <div class="col-xs-3 text-left">
+            <input type="radio" name="autoVerify" id="autoVerifyY" value="Y" v-model="autoVerify">
+            <label for="autoVerifyY">是</label>
+            <input type="radio" name="autoVerify" id="autoVerifyN" value="N" v-model="autoVerify">
+            <label for="autoVerifyN">否</label>
+        </div>
+        <div class="col-xs-3 text-right">彩金增加随机数</div>
+        <div class="col-xs-3 text-left">
+            <input type="radio" name="isLotteryAddRandom" id="isLotteryAddRandomY" value="Y"
+                   v-model="isLotteryAddRandom">
+            <label for="isLotteryAddRandomY">是</label>
+            <input type="radio" name="isLotteryAddRandom" id="isLotteryAddRandomN" value="N"
+                   v-model="isLotteryAddRandom">
+            <label for="isLotteryAddRandomN">否</label>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered table-hover text-center">
+                <tr>
+                    <td class="align-middle text-right" style="vertical-align: middle;">
+                        <h1 class="row text-muted lead">会员提交表单：</h1>
+                        <div class="alert alert-danger" v-show="ohActivityData1ItemsErrorMessage.length != 0">
+                            <strong>Danger!</strong> {{ ohActivityData1ItemsErrorMessage }}.
+                        </div>
+                    </td>
+                    <td style="width:75%">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-4">显示会员账号</div>
+                                <div class="col-xs-4">
+                                    <input type="radio" name="showClientAccount" id="showClientAccountY"
+                                           value="Y" v-model="showClientAccount">
+                                    <label for="showClientAccountY">是</label>
+                                    <input type="radio" name="showClientAccount" id="showClientAccountN"
+                                           value="N" v-model="showClientAccount">
+                                    <label for="showClientAccountN">否</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <select class="form-control" v-model="clientAccountType"
+                                            style="width:120px">
+                                        <option value="1">英文+數字</option>
+                                        <option value="2">數字</option>
+                                        <option value="3">文本(不限制)</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-12"><input class="btn btn-primary" type="button"
+                                                              @click="ohActivityData1Add" value="添加表单"></div>
+                            </div>
+                            <div class="row" v-show="ohActivityData1Items.length == 0">暂无数据</div>
+                            <!-- draggable.start -->
+                            <draggable v-model="ohActivityData1Items" @start="drag=true" @end="drag=false">
+                                <div class="row" v-for="(item,index) in ohActivityData1Items"
+                                     :key="item.columnName" style="margin-top: 2px;">
+                                    <div class="col-xs-4">
+                                        <span v-show="!item.editNow">{{ item.columnName }}</span>
+                                        <input v-show="item.editNow" class="form-control" type="text"
+                                               v-model="item.columnName">
+
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <span v-show="!item.editNow">{{ item.value }}</span>
+                                        <input v-show="item.editNow" class="form-control" type="text"
+                                               v-model="item.value">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input class="btn btn-sm btn-warning" type="button" value="确认"
+                                               v-show="item.editNow"
+                                               @click="ohActivityData1ItemsEditOk(item)"><input
+                                            class="btn btn-sm btn-primary" type="button" value="编辑"
+                                            v-show="!item.editNow" @click="ohActivityData1ItemsEdit(item)">&nbsp;/&nbsp;<input
+                                            class="btn btn-sm btn-danger" type="button" value="删除"
+                                            @click="ohActivityData1ItemsRemove(index)">
+                                    </div>
+                                </div>
+                            </draggable>
+                            <!-- draggable.end -->
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+<!-- CDNJS :: Sortable (https://cdnjs.com/) -->
+<script src="../lib/Sortable.1.7.0.min.js"></script>
+<!-- CDNJS :: Vue.Draggable (https://cdnjs.com/) -->
+<script src="../lib/vuedraggable.min.js"></script>
+<script>
+    let activityList = {};
+
+    activityList.vm = new Vue({
+        el: '#app',
+        data: {
+            activityTemplate: 'C',
+            autoVerify: 'N',
+            isLotteryAddRandom: 'N',
+            showClientAccount: 'N',
+            clientAccountType: '2',
+            ohActivityData1ItemsErrorMessage: '',
+            ohActivityData1Items: [
+                {'editNow': false, 'columnName': '游戏注单号', 'value': '数字'},
+                {'editNow': false, 'columnName': '本金', 'value': '数字'},
+            ]
+        },
+        computed: {
+            ohActivityData1Rowspan: function () {
+                return this.ohActivityData1Items.length + 5;
+            }
+        },
+        methods: {
+            ohActivityData1ItemsIsEditing() { //沒有編輯狀態
+                let canAdd = true;
+                this.ohActivityData1Items.every(item => {
+                    if (item.editNow === true) {
+                        canAdd = false;
+                        return false;
+                    }
+                });
+                return canAdd;
+            },
+            ohActivityData1Add() {
+                if (this.ohActivityData1ItemsIsEditing()) {
+                    this.ohActivityData1Items.unshift({
+                        'editNow': true,
+                        'columnName': this.ohActivityData1Items.length,
+                        'value': ''
+                    });
+                }
+            },
+            ohActivityData1ItemsRemove(index) {
+                this.ohActivityData1Items.splice(index, 1);
+                if (this.ohActivityData1ItemsIsEditing()) {
+                    this.ohActivityData1ItemsErrorMessage = '';
+                }
+            },
+            ohActivityData1ItemsEdit(item) {
+                item.editNow = true;
+            },
+            ohActivityData1ItemsEditOk(item) {
+                if (item.columnName == '') {
+                    this.ohActivityData1ItemsErrorMessage = 'columnName error';
+                    return;
+                }
+                if (item.value == '') {
+                    this.ohActivityData1ItemsErrorMessage = 'value error';
+                    return;
+                }
+                this.ohActivityData1ItemsErrorMessage = '';
+                item.editNow = false;
+            },
+
+
+        }
+    });
+</script>
+</body>
+
+</html>

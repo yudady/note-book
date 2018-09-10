@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [class*="icon-"] {
+      background-color: blueviolet;
+    }
+
+    *[title] {
+      color: red;
+    }
+
+    .bbb::before {
+      content: "CSS-加入before-------";
+      background-color: pink;
+    }
+
+    .bbb {
+      background-image: url("https://www.google.com.tw/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png");
+      background-repeat: no-repeat;
+      background-size: auto;
+    }
+
+    .bbb::after {
+      content: "-------CSS-加入aftere";
+      background-color: pink;
+      height: 100px;
+      line-height: 90px;
+      border: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="icon-aa ffff">111111</div>
+  <div title="dd">22222</div>
+  <div class="fsdf-icon-aa">33333</div>
+  <div class="bbb icon-aa">44444</div>
+  <div>55555</div>
+
+
+</body>
+
+</html>
