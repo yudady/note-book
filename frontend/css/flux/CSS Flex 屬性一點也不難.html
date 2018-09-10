@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            /* height: 200px; */
+            width: 1200px;
+            align-items: stretch;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            /* Can be changed in the live sample */
+            background-color: #8c8c8c;
+        }
+
+
+        .item {
+            box-sizing: border-box;
+            border: 2px solid #8c8c8c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            /* overflow: hidden; */
+        }
+
+        #item1 {
+            background-color: aqua;
+            width: 600px;
+        }
+
+        #item2 {
+            background-color: beige;
+            width: 300px;
+        }
+
+        #item3 {
+            background-color: chocolate;
+            width: 100px;
+        }
+
+        #item4 {
+            background-color: chartreuse;
+        }
+
+        #item5 {
+            background-color: darkgoldenrod;
+            width: 796px;
+        }
+
+        #item6 {
+            background-color: coral;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>圖解：CSS Flex 屬性一點也不難</h1>
+    <h1>https://wcc723.github.io/css/2017/07/21/css-flex/</h1>
+    <div id="container">
+        <div class="item" id="item1">
+            <div>
+                <h1>item1</h1>
+                <img src="../image/20180910203950.png" width="596">
+            </div>
+
+        </div>
+
+
+        <div class="item" id="item2">
+            <div>
+                <h1>item2</h1>
+                <h3>外容器 display</h3>
+                <p>
+                    一開始要宣告為 flex 才能使用，如果沒有宣告為 flex，本篇大部分的屬性都無法作用，不過除了 flex 外，還有一個 inline-flex，作用類似於 inline-block + flex。
+                </p>
+                <h3>flex-direction</h3>
+                <p>
+                    Flex 決定內元件排序方向的重要屬性，這也直接影響了 flex 的軸線 (主軸及交錯軸)，flex 中的對齊屬性都與此有很大的相關聯，下圖中是預設狀態的軸線方向。
+                </p>
+            </div>
+
+        </div>
+
+
+
+        <div class="item" id="item3">
+            <div>
+                <h1>item3</h1>
+                <h3>flex-wrap</h3>
+                <p>超出範圍時是否換行的屬性，分為換行、不換行、換行時反轉。</p>
+            </div>
+
+        </div>
+        <div class="item" id="item4">
+            <img src="../image/20180910204503.png" style="width:400px;">
+        </div>
+
+
+        <div class="item" id="item5">
+            <h1>item5</h1>
+            <img src="../image/20180910205051.png">
+        </div>
+        <div class="item" id="item6">
+            <div>
+                <h1>item6</h1>
+                <img src="../image/20180910205626.png">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
