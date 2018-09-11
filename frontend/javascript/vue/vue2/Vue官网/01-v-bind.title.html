@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div id="app">
+    <div>
+        <input type="text" v-model="name">
+        <input type="text" v-model="age">
+        <button @click="addPerson()">add</button>
+    </div>
+
+    <table>
+        <thead>
+        <th>name</th>
+        <th>age</th>
+        </thead>
+        <tbody>
+        <tr v-for="(p,index) in persons">
+            <td>{{p.name}}</td>
+            <td>{{p.age}}</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: '',
+            age: '',
+            persons: [
+                {'name': 'A', 'age': 18},
+                {'name': 'B', 'age': 19},
+                {'name': 'C', 'age': 20},
+                {'name': 'd', 'age': 21},
+            ]
+        },
+        methods: {
+            addPerson: function () {
+                let np = {'name': this.name, 'age': this.age};
+                this.persons.unshift(np);
+            },
+
+        }
+    });
+
+</script>
 </body>
 </html>
