@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>00.skeleton</title>
+    <link href="../lib/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .active {
+            background-color: red;
+
+        }
+
+        strong {
+            font-size: 36px;
+        }
+
+        .blue-color {
+            color: blue;
+        }
+
+        .redClass {
+            color: brown;
+        }
+    </style>
+</head>
+
+<body class="panel">
+
+
+    <div id="app" class="panel-body">
+        <button class="btn btn-primary" type="button" :disabled="!ddd">disabled</button>
+        <button class="btn btn-primary" type="button" :disabled=" 1 != 1 ">button2</button>
+        <button class="btn btn-primary" type="button" :disabled=" 'a' === 'b' ">button3</button>
+        <button class="btn btn-primary" type="button" :disabled="(function(){return true} )()">button4</button>
+        <br>
+        <br>
+        <table :style="redStyle" width="{{w}}">
+            <tr>
+                <td>{{w}}不生效</td>
+            </tr>
+        </table>
+        <br>
+        <table :style="[redStyle,fontStyle]" :width="w">
+            <tr>
+                <td>{{w}}生效</td>
+            </tr>
+        </table>
+        <br>
+        <strong :class="[ red ]">word1</strong>
+        <br>
+        <strong :class="{ 'blue-color' : word2 }">word2</strong>
+        <br>
+        <strong class="bg-info" :class="word3">word3</strong>
+        <br>
+        <ul class="top_bar">
+            <!-- { 'active': cell === selected } -->
+            <li class="top_cell blue-color" v-for="cell in 5" :class="{ 'active': cell === selected }" @click="choose(cell)">
+                {{cell * 1000000000000}}
+            </li>
+        </ul>
+    </div>
+
+
+    <script src="../lib/vue.v2.5.2.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                redStyle: {
+                    'background-color': 'red',
+                    'height': '80px'
+
+                },
+                fontStyle: {
+                    'font-size': '36px',
+                    'border-top': '20px solid pink'
+                },
+                word3: {
+                    'blue-color': true
+                },
+                word2: true,
+                w: "300px",
+                red: "redClass", // redClass指向css
+                ddd: false,
+                selected: null
+            },
+            methods: {
+                choose: function (cell) {
+                    this.selected = cell
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
