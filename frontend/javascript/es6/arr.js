@@ -138,46 +138,43 @@ let array = [
     }
 ];
 let ans = array.every(function (item, index, array) {
-    console.log(item, index, array); // 物件, 索引, 全部陣列
-    return item.age > 10 // 當全部 age 大於 10 才能回傳 true
+    // 物件, 索引, 全部陣列
+    console.log(item, index, array); 
+    // 當全部 age 大於 10 才能回傳 true
+    return item.age > 10 
 });
 console.log(ans); // false: 只要有部分不符合，則為 false
 let ans2 = array.every(function (item, index, array) {
     return item.age < 25
 });
-console.log(ans2); // true: 全部 age 都小於 25
+// true: 全部 age 都小於 25
+console.log(ans2); 
 
 // Array.prototype.some()
-let ans = people.some(function (item, index, array) {
-    return item.age > 10 // 當全部 age 大於 10 才能回傳 true
+let ans3 = people.some(function (item, index, array) {
+    // 當全部 age 大於 10 才能回傳 true
+    return item.age > 10 
 });
-console.log(ans);  // true: 只要有部分符合，則為 true
-let ans2 = people.some(function (item, index, array) {
+// true: 只要有部分符合，則為 true
+console.log(ans3);  
+let ans4 = people.some(function (item, index, array) {
     return item.age < 25
 });
-console.log(ans2); // true: 只要有部分符合，則為 true  
-let ans2 = people.some(function (item, index, array) {
+// true: 只要有部分符合，則為 true  
+console.log(ans4); 
+let ans5 = people.some(function (item, index, array) {
     return item.age > 25
 });
-console.log(ans2); // false: 全部都不符合則為 false
-
-// Array.prototype.reduce()
-let reduceEmpty = people.reduce(function (accumulator, currentValue, currentIndex, array) {
-});
-console.log(reduceEmpty);                 // 沒有條件，會是 undefined
-let reducePlus = people.reduce(function (accumulator, currentValue, currentIndex, array) {
-    // 分別為前一個回傳值, 目前值, 當前索引值
-    console.log(accumulator, currentValue, currentIndex);
-    return accumulator + currentValue.age;  // 與前一個值相加
-}, 0);                                    // 傳入初始化值為 0
-console.log(reducePlus);                  // 總和為 46
+// false: 全部都不符合則為 false
+console.log(ans5); 
 
 
-let reducePlus = people.reduce(function (accumulator, currentValue, currentIndex, array) {
-    console.log('reduce', accumulator, currentValue, currentIndex)
-    return Math.max(accumulator, currentValue.age); // 與前一個值比較哪個大
-}, 0);
-console.log(reducePlus);                  // 最大值為 24
+
+
+
+
+
+
 
 
 
