@@ -42,4 +42,4 @@ console.log(reducePlus2); // 最大值為 24
 let reducePlus3 = people.reduce((sum, people) => {
     return sum + people.age;
 });
-console.log(reducePlus2);
+console.log(reducePlus3);

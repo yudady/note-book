@@ -1,7 +1,4 @@
 # 我的设定
-js 
-ctrl + shift + p
-quokka.js start on current file
 
 
 ```
