@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- canvas读取图片，画出-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body onload="init();">
+    <canvas id="canvas" width="150" height="150"></canvas>
+    <div style="display:none;">
+        <img id="source" src="https://mdn.mozillademos.org/files/5397/rhino.jpg" width="300" height="227">
+        <img id="frame" src="https://mdn.mozillademos.org/files/242/Canvas_picture_frame.png" width="132" height="150">
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <td><img src="https://mdn.mozillademos.org/files/5399/gallery_1.jpg"></td>
+            <td><img src="https://mdn.mozillademos.org/files/5401/gallery_2.jpg"></td>
+            <td><img src="https://mdn.mozillademos.org/files/5403/gallery_3.jpg"></td>
+            <td><img src="https://mdn.mozillademos.org/files/5405/gallery_4.jpg"></td>
+        </tr>
+        <tr>
+            <td><img src="https://mdn.mozillademos.org/files/5407/gallery_5.jpg"></td>
+            <td><img src="https://mdn.mozillademos.org/files/5409/gallery_6.jpg"></td>
+            <td><img src="https://mdn.mozillademos.org/files/5411/gallery_7.jpg"></td>
+            <td><img src="https://mdn.mozillademos.org/files/5413/gallery_8.jpg"></td>
+        </tr>
+    </table>
+    <img id="frame" src="https://mdn.mozillademos.org/files/242/Canvas_picture_frame.png" width="132" height="150">
+
+    <script>
+        function init() {
+            draw1();
+            draw2();
+        }
+
+        function draw1() {
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+            // Draw slice
+            ctx.drawImage(document.getElementById('source'),
+                33, 71, 104, 124, 21, 20, 87, 104);
+            // Draw frame
+            ctx.drawImage(document.getElementById('frame'), 0, 0);
+
+            //
+
+
+
+
+        }
+
+        function draw2() {
+
+            // Loop through all images
+            for (var i = 0; i < document.images.length; i++) {
+
+                // Don't add a canvas for the frame image
+                if (document.images[i].getAttribute('id') != 'frame') {
+
+                    // Create canvas element
+                    canvas = document.createElement('canvas');
+                    canvas.setAttribute('width', 132);
+                    canvas.setAttribute('height', 150);
+
+                    // Insert before the image
+                    document.images[i].parentNode.insertBefore(canvas, document.images[i]);
+
+                    ctx = canvas.getContext('2d');
+
+                    // Draw image to canvas
+                    ctx.drawImage(document.images[i], 15, 20);
+
+                    // Add frame
+                    ctx.drawImage(document.getElementById('frame'), 0, 0);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
