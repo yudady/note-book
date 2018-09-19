@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>babel 帮您编译为 ES5 => script type="text/babel"</h1>
+    <h1>see console</h1>
+    <h1 id="output"></h1>
+
+    <!-- 加载 Babel -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>  -->
+ 
+    <script type="text/babel">
+        class Point {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            toString() {
+                return '(' + this.x + ', ' + this.y + ')';
+            }
+        }
+    
+        function f() {
+            console.log('es5的写法');
+        }
+    
+        var p = new Point('横坐标', '纵坐标');
+        console.log(p);
+        const name = '张三';
+        console.log(name);
+        f();
+    
+        let Arr = [1, 2, 3, 4, 5, 6];
+        console.log(Arr);
+    
+        var array = Arr.filter(obj => obj > 3);
+    
+        
+        console.log(array);
+
+        const getMessage = () => "Hello World => const is es6";
+        document.getElementById('output').innerHTML = getMessage();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <script src="http://unpkg.com/vue/dist/vue.js"></script>
+    <!-- // <script src="vue.js"></script> -->
+</head>
+<body> 
+    <div id="box">
+        <test></test>
+    </div>
+    <script type="text/javascript">
+        //注册
+        Vue.component('test', {
+            template: '<div @click="change">{{msg}}</div>',
+            data:function(){
+                return {msg:'我的组件'}
+            },
+            methods:{
+                change:function(){
+                    //todo
+                    console.log(this);
+                }
+            }
+        });
+
+        //创建根实例
+        var vm = new Vue({
+            el:'#box',
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <script src="http://unpkg.com/vue/dist/vue.js"></script>
+    <!-- // <script src="vue.js"></script> -->
+</head>
+
+<body>
+    <div id="box" class="container-fluid text-center">
+        <div class="col-xs-12">
+            <input class="btn btn-primary" type="button" @click="add" value="添加表单">
+        </div>
+        <br>
+        <br>
+        <br>
+        <actity-data v-for="(post,index) in activityListDataColumnType2" :key="post.id" :item="post" :index="index"
+            @edit-ok="editOk" @edit="edit" @remove="remove"></actity-data>
+    </div>
+
+    <template id="bp">
+        <div class="row">
+
+            <div class="col-xs-4">
+                <span v-show="item.editNow == 'N'">{{item.columnName}}</span>
+                <span v-show="item.editNow == 'Y'">
+                    <input class="columnName" type="text" name="columnName" v-model="item.columnName" />
+                </span>
+            </div>
+            <div class="col-xs-4"><span v-show="item.editNow == 'N'">{{ item.value }}</span>
+                <span v-show="item.editNow == 'Y'">
+                    <select class="" v-model="item.value">
+                        <option value="1">英文+數字</option>
+                        <option value="2">數字</option>
+                        <option value="3">文本(不限制)</option>
+                    </select>
+                </span></div>
+            <div class="col-xs-4">
+                <input class="btn btn-sm btn-warning" type="button" value="确认" v-show="item.editNow == 'Y'" @click="activityListDataColumnTypeEditOk(item)">
+                <input class="btn btn-sm btn-primary" type="button" value="编辑" :class=" {btnEdit : item.editNow == 'Y'} "
+                    v-show="item.editNow == 'N'" @click="activityListDataColumnTypeEdit(item)">
+                &nbsp;/&nbsp;
+                <input class="btn btn-danger" type="button" value="删除" @click="activityListDataColumnTypeRemove(item)">
+            </div>
+
+        </div>
+
+    </template>
+    <script type="text/javascript">
+        Vue.component('actity-data', {
+            props: ['item', 'index'],
+            template: '#bp',
+            methods: {
+
+                activityListDataColumnTypeEditOk(item) {
+                    this.$emit('edit-ok', item)
+                },
+                activityListDataColumnTypeEdit(item) {
+                    this.$emit('edit', item)
+                },
+                activityListDataColumnTypeRemove(item) {
+                    this.$emit('remove', item)
+                },
+            }
+        })
+
+        //创建根实例
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                activityListDataColumnType2: [{
+                        id: 1,
+                        editNow: 'N',
+                        value: '1',
+                        columnType: '4',
+                        columnName: 'columnName1',
+                    },
+                    {
+                        id: 2,
+                        editNow: 'Y',
+                        value: '1',
+                        columnType: '4',
+                        columnName: 'columnName2',
+                    },
+                    {
+                        id: 3,
+                        editNow: 'N',
+                        value: '1',
+                        columnType: '4',
+                        columnName: 'columnName3',
+                    }
+                ],
+                items: []
+            },
+            methods: {
+                add() {
+                    this.activityListDataColumnType2.unshift({
+                        'id': new Date().getTime(),
+                        'editNow': 'Y',
+                        'value': '1',
+                        'columnType': '1',
+                        'columnName': '',
+                    });
+                },
+                editOk(item) {
+                    console.log(item);
+                    let index = activityListDataColumnType2.findIndex(item)
+                    //this.activityListDataColumnType2[index].editNow = 'N';
+                },
+                edit(item) {
+                    console.log(item);
+                    //this.activityListDataColumnType2[index].editNow = 'N';
+                },
+                remove(item) {
+                    console.log(item);
+                    //this.activityListDataColumnType2.splice(index, 1);
+                },
+
+
+
+            }
+        });
+    </script>
+</body>
+
+</html>
