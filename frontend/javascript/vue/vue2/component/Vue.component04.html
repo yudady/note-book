@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <script src="http://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../lib/Sortable.1.7.0.min.js"></script>
+    <script src="../lib/vuedraggable.min.js"></script>
+</head>
+
+<body>
+<div id="box" class="container-fluid text-center">
+    <br>
+    <br>
+    <div class="col-xs-12">
+        <input class="btn btn-primary" type="button" @click="add1" value="添加表单">
+    </div>
+
+    <br>
+    <draggable v-model="activityListDataColumnType1">
+        <actity-data v-for="(post,index) in activityListDataColumnType1" :key="post.id" :item="post"
+                     :index="index"
+                     :arr="activityListDataColumnType1"></actity-data>
+    </draggable>
+    <br>
+    <br>
+    <div class="col-xs-12">
+        <input class="btn btn-primary" type="button" @click="add2" value="添加表单">
+    </div>
+    <br>
+    <draggable v-model="activityListDataColumnType2">
+        <actity-data v-for="(post,index) in activityListDataColumnType2" :key="post.id" :item="post"
+                     :index="index"
+                     :arr="activityListDataColumnType2"></actity-data>
+    </draggable>
+</div>
+
+<script type="text/javascript">
+    //创建根实例
+    var vm = new Vue({
+        el: '#box',
+        components: {
+            'actity-data': {
+                props: ['item', 'index', 'arr'],
+                template: `
+<div class="row">
+<div class="col-xs-4">
+    <span v-show="item.editNow == 'N'">{{item.columnName}}</span>
+    <span v-show="item.editNow == 'Y'">
+        <input class="columnName" type="text" name="columnName" v-model="item.columnName" />
+    </span>
+</div>
+<div class="col-xs-4"><span v-show="item.editNow == 'N'">{{ item.value }}</span>
+    <span v-show="item.editNow == 'Y'">
+        <select class="" v-model="item.value">
+            <option value="1" @change="item.value = 1">英文+數字</option>
+            <option value="2" @change="item.value = 2">數字</option>
+            <option value="3" @change="item.value = 3">文本(不限制)</option>
+        </select>
+    </span></div>
+<div class="col-xs-4">
+    <input class="btn btn-sm btn-warning" type="button" value="确认" v-show="item.editNow == 'Y'" @click="item.editNow = 'N'">
+    <input class="btn btn-sm btn-primary" type="button" value="编辑" :class=" {btnEdit : item.editNow == 'Y'} "
+        v-show="item.editNow == 'N'" @click="item.editNow = 'Y'">
+    &nbsp;/&nbsp;
+    <input class="btn btn-danger" type="button" value="删除" @click="activityListDataColumnTypeRemove(index)">
+</div>
+</div>         
+                    `,
+                methods: {
+                    activityListDataColumnTypeRemove(index) {
+                        this.arr.splice(index, 1);
+                    },
+                }
+            }
+        },
+        data: {
+            activityListDataColumnType1: [{
+                id: 1,
+                editNow: 'N',
+                value: '1',
+                columnType: '1',
+                columnName: 'columnName1',
+            },
+                {
+                    id: 2,
+                    editNow: 'Y',
+                    value: '1',
+                    columnType: '1',
+                    columnName: 'columnName2',
+                },
+                {
+                    id: 3,
+                    editNow: 'N',
+                    value: '1',
+                    columnType: '1',
+                    columnName: 'columnName3',
+                }
+            ],
+            activityListDataColumnType2: [{
+                id: 1,
+                editNow: 'N',
+                value: '1',
+                columnType: '2',
+                columnName: 'columnName1',
+            },
+                {
+                    id: 2,
+                    editNow: 'Y',
+                    value: '1',
+                    columnType: '2',
+                    columnName: 'columnName2',
+                },
+                {
+                    id: 3,
+                    editNow: 'N',
+                    value: '1',
+                    columnType: '2',
+                    columnName: 'columnName3',
+                },
+                {
+                    id: 4,
+                    editNow: 'N',
+                    value: '1',
+                    columnType: '2',
+                    columnName: 'columnName3',
+                }
+            ],
+        },
+        methods: {
+            add1() {
+                this.activityListDataColumnType1.unshift({
+                    'id': new Date().getTime(),
+                    'editNow': 'Y',
+                    'value': '1',
+                    'columnType': '1',
+                    'columnName': '',
+                });
+            },
+            add2() {
+                this.activityListDataColumnType2.unshift({
+                    'id': new Date().getTime(),
+                    'editNow': 'Y',
+                    'value': '1',
+                    'columnType': '1',
+                    'columnName': '',
+                });
+            },
+
+
+        }
+    });
+</script>
+</body>
+
+</html>

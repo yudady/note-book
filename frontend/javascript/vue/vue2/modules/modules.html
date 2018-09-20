@@ -1,0 +1,31 @@
+<html>
+<head><title>ES6 modules tryout</title>
+    <script src="index.js" type="module"></script>
+</head>
+<body>
+<h1>module</h1>
+
+<!-- executed after HTML is parsed -->
+<script type="module">
+    import d from './index.js';
+    import {addTextToBody} from './utils.mjs';
+
+    addTextToBody('Modules are pretty cool.');
+
+
+
+    window.deep = d.dep1;
+    console.log('js module');
+    console.log(deep);
+</script>
+
+
+<!-- executed immediately -->
+<script>
+    console.log('standard module', "   =>   ", window.deep);
+
+</script>
+
+
+</body>
+</html>
