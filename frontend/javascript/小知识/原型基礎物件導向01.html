@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <script>
+        function Player() {}
+
+        console.log(Player);
+        console.log(Player.prototype);
+        console.log(Player.prototype.constructor);
+        console.log(Player.prototype.constructor === Player) //true
+
+        console.log("%c需要输出的信息 ", "css 代码");
+        console.log('%c就医不难，健康有道', 'font-size:25px;color:#377bee;');
+        console.log("%c3D Text",
+            " text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);font-size:5em"
+        )
+
+
+
+
+        let url = window.location.href;
+        let urlparent = url.substr(0, url.lastIndexOf("/"));
+        console.log(urlparent);
+        let imgUrl = urlparent + "/img/day51_1.gif";
+
+        let imageCss = "padding:20px 150px;line-height:120px; background:url('" + imgUrl + "') no-repeat;";
+        console.log(imageCss);
+
+        console.log("%c 把图片show出来  ", imageCss);
+
+ 
+
+        console.log(Player.__proto__);
+        console.log(Player.prototype.__proto__);
+        //最上層的Object.prototype的__proto__是null值，它是一個特例 
+        console.log(Object.prototype.__proto__) //null
+        console.log(Player.__proto__ === Function.prototype); //true 
+        console.log(Player.prototype.__proto__ === Object.prototype) //true 
+        console.log(Function.prototype.__proto__ === Object.prototype) //true
+    </script>
+</body>
+
+</html>
