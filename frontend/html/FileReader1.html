@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FileReader</title>
+
+</head>
+
+<body>
+
+    <input id="uploadFile" type="file"><br>
+    <img id="previewImg" src="" height="200" alt="Image preview...">
+    <script>
+        window.onload = function () {
+            var preview = document.getElementById('previewImg');
+            var file = document.getElementById('uploadFile');
+            console.log(file);
+            console.dir(file);
+
+
+            file.addEventListener('change', function (e) {
+                var fr = new FileReader();
+                fr.addEventListener('progress', function (event) {
+                    console.dir("event progress");
+                    console.dir(event);
+                });
+
+                fr.addEventListener('load', function (event) {
+                    console.log('event load ');
+                    var b64Img = fr.result;
+                    console.log(b64Img);
+                });
+
+                fr.addEventListener('loadend', function (event) {
+                    console.log('event loadend ');
+                    console.dir(event);
+                    // 图片src = base64的image
+                    preview.src = event.currentTarget.result;
+                });
+
+                fr.readAsDataURL(file.files[0]); // 读取base64
+            });
+
+
+
+        }
+    </script>
+</body>
+
+</html>
