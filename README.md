@@ -7,6 +7,16 @@
 ## TODO LIST
 
 
+
+准备 使用github 当 blog
+https://yudady.github.io/
+
+
+
+
+
+
+
 2. GOOGLD 網站分析 百度統計
 - [Piwik](https://matomo.org/)
 - [Piwik ─ 足以匹敵 Google Analytics 的網站分析工具](https://blog.dcplus.com.tw/market/piwik)
