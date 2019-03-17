@@ -17,6 +17,6 @@
 **/build
 **/target
 
-
+**/node_modules
 
 /維運/maintenance
