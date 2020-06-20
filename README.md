@@ -49,12 +49,6 @@ shareim
 - http://www.yudady.tk
 
 
-
-## license server
-- intellij licence server before v.2017.2.5  => http://yudady.tplinkdns.com:8081
-- jrebel licence server => http://yudady.tplinkdns.com:8081/88414687-3b91-4286-89ba-2dc813b107ce
-
-
 ## 我的网路 
 - 路由器 tplinkdns (http://192.168.168.1) 如何設定(yahoo mail/yu) yuxxx/yuxxx
 - vpn
