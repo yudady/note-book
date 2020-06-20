@@ -18,7 +18,7 @@
         <quartz.version>2.1.5</quartz.version>
         <ehcache.version>2.5.2</ehcache.version>
         <hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
-        <jackson.version>2.0.1</jackson.version>
+        <jackson.version>2.11.0</jackson.version>
         <slf4j.version>1.6.4</slf4j.version>
         <jetty.version>7.6.3.v20120416</jetty.version>
         <javax.validation.version>1.0.0.GA</javax.validation.version>
